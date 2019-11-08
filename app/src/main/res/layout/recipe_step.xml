@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/playerView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></com.google.android.exoplayer2.ui.PlayerView>
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="362dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="56dp"
+        android:text="Instructions Here"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playerView"></TextView>
+
+    <Button
+        android:id="@+id/buttonPreviousStep"
+        android:layout_width="53dp"
+        android:layout_height="17dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="120dp"
+        android:text="Previous Step"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"></Button>
+
+    <Button
+        android:id="@+id/buttonNextStep"
+        android:layout_width="50dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="80dp"
+        android:text="Next Step"
+        app:layout_constraintEnd_toStartOf="@+id/buttonPreviousStep"
+        app:layout_constraintTop_toBottomOf="@+id/textView"></Button>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
