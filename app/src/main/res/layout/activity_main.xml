@@ -7,12 +7,26 @@
     tools:context=".MainActivity">
 
     <ImageView
+        android:id="@+id/imageView_main_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/nutella_pie"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView_main_name"
+        android:layout_width="285dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="132dp"
+        android:gravity="left"
+        android:text="Nutella Pie"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView_main_image"></TextView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
