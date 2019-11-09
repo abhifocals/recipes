@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/gridView"
         android:numColumns="2"
-        android:columnWidth="100dp"></GridView>
+        android:columnWidth="100dp"
+        android:clickable="true"></GridView>
 
 </RelativeLayout>

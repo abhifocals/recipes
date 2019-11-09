@@ -13,11 +13,11 @@
 
     <!--    Replace w/RecylerView-->
 
-    <TextViesw
+    <TextView
         android:id="@+id/textViewDetailIngredients"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ingredients"></TextViesw>
+        android:text="Ingredients"></TextView>
 
 
     <!--    Replace w/RecylerView-->
