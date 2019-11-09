@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.focals.recipes.utils.JsonParser;
+import com.focals.recipes.utils.RecipeJsonParser;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        JsonParser.getRecipes();
+
+        RecipeJsonParser.getRecipes(this);
     }
 }
