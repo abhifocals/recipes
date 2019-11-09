@@ -3,8 +3,11 @@ package com.focals.recipes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.GridView;
 
 import com.focals.recipes.utils.RecipeJsonParser;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,6 +17,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        RecipeJsonParser.getRecipes(this);
+        ArrayList<Recipe> recipeList = RecipeJsonParser.getRecipes(this);
+
+        GridView gridView = (GridView) findViewById(R.id.gridView);
+        RecipeAdapter recipeAdapter = new RecipeAdapter(this, R.layout.recipe_item, recipeList);
+
+        gridView.setAdapter(recipeAdapter);
+
+
     }
 }
