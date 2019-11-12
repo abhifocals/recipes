@@ -32,32 +32,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Recipe recipe  = recipeList.get(position);
+                Recipe recipe = recipeList.get(position);
 
                 Intent intent = new Intent(MainActivity.this, RecipeDetailActivity.class);
 
-
                 // Name
-
                 intent.putExtra("name", recipe.getName());
-
-
 
                 // Ingredients List
                 intent.putExtra("ingredients", recipe.getIngredients());
 
-
-
                 // Steps List
                 intent.putExtra("steps", recipe.getSteps());
 
-
                 startActivity(intent);
-
-
             }
         });
-
-
     }
 }

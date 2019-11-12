@@ -31,8 +31,6 @@ public class RecipeAdapter extends ArrayAdapter<Recipe> {
     static class ViewHolder {
         ImageView recipeImage;
         TextView recipeTitle;
-
-
     }
 
     @NonNull
@@ -54,11 +52,11 @@ public class RecipeAdapter extends ArrayAdapter<Recipe> {
 
             convertView.setTag(holder);
         } else {
-            holder = (ViewHolder) convertView.getTag();
+            holder = (ViewHolder) convertView.getTag(); // TODO remove and see what happens. 15m.
         }
 
         holder.recipeImage.setImageResource(R.drawable.nutella_pie);
-        holder.recipeTitle.setText("Nutella Pie");
+        holder.recipeTitle.setText(recipe.getName());
 
         return convertView;
     }
