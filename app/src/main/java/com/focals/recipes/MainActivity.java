@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.GridView;
+import android.widget.ListView;
 
 import com.focals.recipes.utils.RecipeJsonParser;
 
@@ -22,12 +22,12 @@ public class MainActivity extends AppCompatActivity {
 
         final ArrayList<Recipe> recipeList = RecipeJsonParser.getRecipes(this);
 
-        GridView gridView = (GridView) findViewById(R.id.gridView);
+        ListView listView = (ListView) findViewById(R.id.listView);
         RecipeAdapter recipeAdapter = new RecipeAdapter(this, R.layout.activity_main_single, recipeList);
 
-        gridView.setAdapter(recipeAdapter);
+        listView.setAdapter(recipeAdapter);
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
