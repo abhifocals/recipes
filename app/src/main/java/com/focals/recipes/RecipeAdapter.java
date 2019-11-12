@@ -35,27 +35,40 @@ public class RecipeAdapter extends ArrayAdapter<Recipe> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-
-        ViewHolder holder;
         Recipe recipe = getItem(position);
+        ViewHolder holder = new ViewHolder();
+        LayoutInflater inflater = LayoutInflater.from(context);
+        convertView = inflater.inflate(layoutResourceId, parent, false);
 
-        if (convertView == null) {
+        // Finding Views
+        holder.recipeImageView = (ImageView) convertView.findViewById(R.id.recipeImage);
+        holder.recipeTitleTextView = (TextView) convertView.findViewById(R.id.recipeTitle);
 
-            LayoutInflater inflater = LayoutInflater.from(context);
-
-            convertView = inflater.inflate(layoutResourceId, parent, false);
-            holder = new ViewHolder();
-
-            holder.recipeImageView = (ImageView) convertView.findViewById(R.id.recipeImage);
-            holder.recipeTitleTextView = (TextView) convertView.findViewById(R.id.recipeTitle);
-
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag(); // TODO remove and see what happens. 15m.
-        }
-
-        holder.recipeImageView.setImageResource(R.drawable.nutella_pie);
+        // Setting View Data
         holder.recipeTitleTextView.setText(recipe.getName());
+
+
+        // Extract into method
+        switch (recipe.getName()) {
+
+            case "Nutelle Pie":
+                holder.recipeImageView.setImageResource(R.drawable.nutella_pie);
+                break;
+
+            case "Brownies":
+                holder.recipeImageView.setImageResource(R.drawable.brownies);
+                break;
+
+            case "Cheesecake":
+                holder.recipeImageView.setImageResource(R.drawable.cheesecake);
+                break;
+
+            case "Yellow Cake":
+                holder.recipeImageView.setImageResource(R.drawable.yellow_cake);
+                break;
+
+
+        }
 
         return convertView;
     }
