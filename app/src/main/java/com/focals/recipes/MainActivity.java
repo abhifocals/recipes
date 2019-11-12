@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         final ArrayList<Recipe> recipeList = RecipeJsonParser.getRecipes(this);
 
         GridView gridView = (GridView) findViewById(R.id.gridView);
-        RecipeAdapter recipeAdapter = new RecipeAdapter(this, R.layout.recipe_item, recipeList);
+        RecipeAdapter recipeAdapter = new RecipeAdapter(this, R.layout.activity_main_single, recipeList);
 
         gridView.setAdapter(recipeAdapter);
 
