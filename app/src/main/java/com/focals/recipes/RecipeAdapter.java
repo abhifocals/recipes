@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,8 +28,8 @@ public class RecipeAdapter extends ArrayAdapter<Recipe> {
     }
 
     static class ViewHolder {
-        ImageView recipeImage;
-        TextView recipeTitle;
+        ImageView recipeImageView;
+        TextView recipeTitleTextView;
     }
 
     @NonNull
@@ -47,16 +46,16 @@ public class RecipeAdapter extends ArrayAdapter<Recipe> {
             convertView = inflater.inflate(layoutResourceId, parent, false);
             holder = new ViewHolder();
 
-            holder.recipeImage = (ImageView) convertView.findViewById(R.id.recipeImage);
-            holder.recipeTitle = (TextView) convertView.findViewById(R.id.recipeTitle);
+            holder.recipeImageView = (ImageView) convertView.findViewById(R.id.recipeImage);
+            holder.recipeTitleTextView = (TextView) convertView.findViewById(R.id.recipeTitle);
 
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag(); // TODO remove and see what happens. 15m.
         }
 
-        holder.recipeImage.setImageResource(R.drawable.nutella_pie);
-        holder.recipeTitle.setText(recipe.getName());
+        holder.recipeImageView.setImageResource(R.drawable.nutella_pie);
+        holder.recipeTitleTextView.setText(recipe.getName());
 
         return convertView;
     }
