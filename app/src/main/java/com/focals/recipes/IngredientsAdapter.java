@@ -45,7 +45,13 @@ public class IngredientsAdapter extends ArrayAdapter<HashMap<String, String>> {
 
         // Set name of Ingredient in TextView
         HashMap<String, String> currentIngredient = ingredientsList.get(position);
-        holder.ingredientTextView.setText(currentIngredient.get(RecipeJsonParser.INGREDIENT));
+
+        String ingredient = currentIngredient.get(RecipeJsonParser.INGREDIENT);
+        String qty = currentIngredient.get(RecipeJsonParser.QUANTITY);
+        String measure = currentIngredient.get(RecipeJsonParser.MEASURE);
+        String ingredientWithQtyMeasure = qty + " " + measure + " " + ingredient;
+
+        holder.ingredientTextView.setText(ingredientWithQtyMeasure);
 
         return convertView;
     }
