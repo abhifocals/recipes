@@ -1,32 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
     <TextView
-        android:id="@+id/textViewDetailRecipeName"
+        android:id="@+id/tv_RecipeName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nutella Pie"></TextView>
+        android:gravity="center"
+        android:text="Nutella Pie"
+        android:textSize="20sp"></TextView>
 
-    <!--    Replace w/RecylerView-->
-
-    <TextView
-        android:id="@+id/textViewDetailIngredients"
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ingredients"></TextView>
+        android:textSize="40sp"
+        android:text="Show Ingredients"
+        android:onClick="showIngredients"></Button>
 
-
-    <!--    Replace w/RecylerView-->
-
-    <TextView
-        android:id="@+id/textViewDetailSteps"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_steps"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Steps"></TextView>
-
-
+        android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
+    
 </LinearLayout>

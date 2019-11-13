@@ -2,12 +2,18 @@ package com.focals.recipes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class RecipeDetailActivity extends AppCompatActivity {
+
+    private String name;
+    private ArrayList<HashMap<String, String>> ingredients;
+    private ArrayList<HashMap<String, String>> steps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,13 +21,16 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_detail_recipe);
 
-        String name = getIntent().getStringExtra("name");
+        name = getIntent().getStringExtra("name");
+        ingredients = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra("ingredients");
+        steps = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra("steps");
+    }
 
-        ArrayList<HashMap<String, String>> ingredients = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra("ingredients");
+    public void showIngredients(View v) {
 
-        ArrayList<HashMap<String, String>> steps = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra("steps");
+        Intent intent = new Intent(this, IngredientsActivity.class);
+        intent.putExtra("ingredients", ingredients);
 
-        System.out.println();
-
+        startActivity(intent);
     }
 }
