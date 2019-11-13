@@ -22,6 +22,7 @@ public class IngredientsActivity extends AppCompatActivity {
         // Setup IngredientAdapter
         IngredientsAdapter ingredientsAdapter = new IngredientsAdapter(this, R.layout.activity_ingredients_singleingredient, ingredientsList);
         ListView ingredientsListView = (ListView) findViewById(R.id.lv_ingredients);
+        ingredientsListView.setDivider(null);
 
         ingredientsListView.setAdapter(ingredientsAdapter);
     }
