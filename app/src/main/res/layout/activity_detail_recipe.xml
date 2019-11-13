@@ -17,8 +17,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="40sp"
-        android:text="Show Ingredients"
-        android:onClick="showIngredients"></Button>
+        android:text="See Ingredients"
+        android:onClick="showIngredients"
+        android:textAllCaps="false"></Button>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Steps: "
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_steps"
