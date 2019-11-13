@@ -32,10 +32,10 @@ public class RecipeDetailActivity extends AppCompatActivity {
         // Setup StepAdapter
         StepAdapter stepAdapter = new StepAdapter(steps);
         RecyclerView stepsRecyclerView = findViewById(R.id.rv_steps);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
         stepsRecyclerView.setAdapter(stepAdapter);
-        stepsRecyclerView.setLayoutManager(gridLayoutManager);
+        stepsRecyclerView.setLayoutManager(linearLayoutManager);
 
         stepsRecyclerView.setOnClickListener(new View.OnClickListener() {
             @Override
