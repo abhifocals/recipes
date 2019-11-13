@@ -20,7 +20,7 @@ public class IngredientsActivity extends AppCompatActivity {
         ArrayList<HashMap<String, String>> ingredientsList = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra("ingredients");
 
         // Setup IngredientAdapter
-        IngredientsAdapter ingredientsAdapter = new IngredientsAdapter(this, R.layout.activity_ingredients_single, ingredientsList);
+        IngredientsAdapter ingredientsAdapter = new IngredientsAdapter(this, R.layout.activity_ingredients_singleingredient, ingredientsList);
         ListView ingredientsListView = (ListView) findViewById(R.id.lv_ingredients);
 
         ingredientsListView.setAdapter(ingredientsAdapter);

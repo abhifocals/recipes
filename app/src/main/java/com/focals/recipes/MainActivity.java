@@ -23,9 +23,9 @@ public class MainActivity extends AppCompatActivity {
         final ArrayList<Recipe> recipeList = RecipeJsonParser.getRecipes(this);
 
         ListView listView = (ListView) findViewById(R.id.listView);
-        RecipeAdapter recipeAdapter = new RecipeAdapter(this, R.layout.activity_main_single, recipeList);
+        MainAdapter mainAdapter = new MainAdapter(this, R.layout.activity_main_singlerecipe, recipeList);
 
-        listView.setAdapter(recipeAdapter);
+        listView.setAdapter(mainAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

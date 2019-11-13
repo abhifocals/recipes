@@ -13,13 +13,13 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class RecipeAdapter extends ArrayAdapter<Recipe> {
+public class MainAdapter extends ArrayAdapter<Recipe> {
 
     private Context context;
     private int layoutResourceId;
     private ArrayList<Recipe> recipelist;
 
-    public RecipeAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Recipe> recipelist) {
+    public MainAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Recipe> recipelist) {
         super(context, resource, recipelist);
 
         this.context = context;
