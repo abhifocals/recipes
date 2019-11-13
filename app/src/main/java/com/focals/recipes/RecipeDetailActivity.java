@@ -1,6 +1,9 @@
 package com.focals.recipes;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +27,24 @@ public class RecipeDetailActivity extends AppCompatActivity {
         name = getIntent().getStringExtra("name");
         ingredients = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra("ingredients");
         steps = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra("steps");
+
+
+        // Setup StepAdapter
+        StepAdapter stepAdapter = new StepAdapter(steps);
+        RecyclerView stepsRecyclerView = findViewById(R.id.rv_steps);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1);
+
+        stepsRecyclerView.setAdapter(stepAdapter);
+        stepsRecyclerView.setLayoutManager(gridLayoutManager);
+
+        stepsRecyclerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Open StepActivity. Or do it in the Adapter?
+            }
+        });
+
+
     }
 
     public void showIngredients(View v) {
