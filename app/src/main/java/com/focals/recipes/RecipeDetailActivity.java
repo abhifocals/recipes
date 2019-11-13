@@ -9,10 +9,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.focals.recipes.utils.RecipeJsonParser;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class RecipeDetailActivity extends AppCompatActivity {
+public class RecipeDetailActivity extends AppCompatActivity implements StepAdapter.StepClickHandler {
 
     private String name;
     private ArrayList<HashMap<String, String>> ingredients;
@@ -30,19 +32,12 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
 
         // Setup StepAdapter
-        StepAdapter stepAdapter = new StepAdapter(steps);
+        StepAdapter stepAdapter = new StepAdapter(steps, this);
         RecyclerView stepsRecyclerView = findViewById(R.id.rv_steps);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
         stepsRecyclerView.setAdapter(stepAdapter);
         stepsRecyclerView.setLayoutManager(linearLayoutManager);
-
-        stepsRecyclerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Open StepActivity. Or do it in the Adapter?
-            }
-        });
 
 
     }
@@ -51,6 +46,20 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, IngredientsActivity.class);
         intent.putExtra("ingredients", ingredients);
+
+        startActivity(intent);
+    }
+
+    @Override
+    public void onStepClick(int position) {
+
+        // Get current Step info
+
+        String stepDesc = steps.get(position).get(RecipeJsonParser.STEP_DESC);
+
+        Intent intent = new Intent(this, StepActivity.class);
+
+        intent.putExtra("stepDesc", stepDesc);
 
         startActivity(intent);
     }

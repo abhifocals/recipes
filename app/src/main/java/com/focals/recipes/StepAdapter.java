@@ -3,11 +3,9 @@ package com.focals.recipes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.focals.recipes.utils.RecipeJsonParser;
-import com.google.android.exoplayer2.SimpleExoPlayer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,10 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
 
-    ArrayList<HashMap<String, String>> stepsList;
+    private ArrayList<HashMap<String, String>> stepsList;
+    public StepClickHandler clickHandler;
 
-    public StepAdapter(ArrayList<HashMap<String, String>> stepsList) {
+    public StepAdapter(ArrayList<HashMap<String, String>> stepsList, StepClickHandler clickHandler) {
         this.stepsList = stepsList;
+        this.clickHandler = clickHandler;
     }
 
     @NonNull
@@ -49,14 +49,27 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
     }
 
 
-    class StepHolder extends RecyclerView.ViewHolder {
+    // To pass click implementation to RecipeDetailActivity
+    public interface StepClickHandler {
+        void onStepClick(int position);
+    }
+
+
+    class StepHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView stepTextView;
 
         public StepHolder(@NonNull View view) {
             super(view);
 
-            stepTextView = view.findViewById(R.id.tv_stepDescription);
+            stepTextView = view.findViewById(R.id.tv_stepShortDescription);
+
+            stepTextView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            clickHandler.onStepClick(getAdapterPosition());
         }
     }
 
