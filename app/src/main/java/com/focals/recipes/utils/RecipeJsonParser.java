@@ -54,9 +54,9 @@ public class RecipeJsonParser {
                     JSONObject ingredientObject = ingredientsArray.getJSONObject(j);
                     HashMap<String, String> singleIngredient = new HashMap<>();
 
-                    singleIngredient.put(QUANTITY, ingredientObject.getString(QUANTITY));
-                    singleIngredient.put(MEASURE, ingredientObject.getString(MEASURE));
-                    singleIngredient.put(INGREDIENT, ingredientObject.getString(INGREDIENT));
+                    singleIngredient.put(QUANTITY, ingredientObject.getString(QUANTITY).toLowerCase());
+                    singleIngredient.put(MEASURE, ingredientObject.getString(MEASURE).toLowerCase());
+                    singleIngredient.put(INGREDIENT, ingredientObject.getString(INGREDIENT).toLowerCase());
 
                     ingredientsList.add(singleIngredient);
                 }
