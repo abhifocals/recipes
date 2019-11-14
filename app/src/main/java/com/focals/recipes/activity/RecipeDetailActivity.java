@@ -8,10 +8,12 @@ import butterknife.ButterKnife;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
 
 import com.focals.recipes.R;
 import com.focals.recipes.adapter.StepAdapter;
+import com.focals.recipes.fragment.IngredientsDetailFragment;
 import com.focals.recipes.utils.RecipeJsonParser;
 
 import java.util.ArrayList;
@@ -26,7 +28,8 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
     @BindView(R.id.rv_steps)
     RecyclerView stepsRecyclerView;
 
-
+    @BindView(R.id.fragment_recipeDetail_tablet)
+    View recipeDetailTabletFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,25 +58,22 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
     public void showIngredients(View v) {
 
 
-        
 
+        if (recipeDetailTabletFragment != null) {
 
+            IngredientsDetailFragment ingredientsDetailFragment = new IngredientsDetailFragment(ingredients);
 
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_tabletRight, ingredientsDetailFragment).commit();
+        }
 
+        else {
+            Intent intent = new Intent(this, IngredientsDetailActivity.class);
+            intent.putExtra("ingredients", ingredients);
+            intent.putExtra("name", name);
 
+            startActivity(intent);
+        }
 
-
-
-
-
-
-
-
-        Intent intent = new Intent(this, IngredientsDetailActivity.class);
-        intent.putExtra("ingredients", ingredients);
-        intent.putExtra("name", name);
-
-        startActivity(intent);
     }
 
     @Override
