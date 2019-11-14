@@ -14,6 +14,8 @@ import android.view.View;
 import com.focals.recipes.R;
 import com.focals.recipes.adapter.StepAdapter;
 import com.focals.recipes.fragment.IngredientsDetailFragment;
+import com.focals.recipes.fragment.RecipeDetailFragment;
+import com.focals.recipes.fragment.StepFragment;
 import com.focals.recipes.utils.RecipeJsonParser;
 
 import java.util.ArrayList;
@@ -57,8 +59,6 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
 
     public void showIngredients(View v) {
 
-
-
         if (recipeDetailTabletFragment != null) {
 
             IngredientsDetailFragment ingredientsDetailFragment = new IngredientsDetailFragment(ingredients);
@@ -79,15 +79,32 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
     @Override
     public void onStepClick(int position) {
 
-        // Get current Step info
-
         String stepDesc = steps.get(position).get(RecipeJsonParser.STEP_DESC);
 
-        Intent intent = new Intent(this, StepActivity.class);
 
-        intent.putExtra("stepDesc", stepDesc);
-        intent.putExtra("name", name);
+        if (recipeDetailTabletFragment != null) {
 
-        startActivity(intent);
+            StepFragment stepFragment = new StepFragment(stepDesc);
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_tabletRight, stepFragment).commit();
+
+
+
+        }
+
+
+        else {
+            // Get current Step info
+
+            Intent intent = new Intent(this, StepActivity.class);
+
+            intent.putExtra("stepDesc", stepDesc);
+            intent.putExtra("name", name);
+
+            startActivity(intent);
+        }
+
+
+
     }
 }
