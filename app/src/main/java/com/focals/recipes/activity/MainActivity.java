@@ -23,17 +23,29 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.listView)
     ListView listView;
 
+    ArrayList<Recipe> recipeList;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        final ArrayList<Recipe> recipeList = RecipeJsonParser.getRecipes(this);
+        recipeList = RecipeJsonParser.getRecipes(this);
 
         MainAdapter mainAdapter = new MainAdapter(this, R.layout.activity_main_singlerecipe, recipeList);
 
         listView.setAdapter(mainAdapter);
+
+
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -56,7 +68,5 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 }

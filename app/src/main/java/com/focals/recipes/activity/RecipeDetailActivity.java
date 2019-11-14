@@ -30,9 +30,6 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
     @BindView(R.id.rv_steps)
     RecyclerView stepsRecyclerView;
 
-    @BindView(R.id.fragment_recipeDetail_tablet)
-    View recipeDetailTabletFragment;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +38,16 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
 
         ButterKnife.bind(this);
 
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
         name = getIntent().getStringExtra("name");
         ingredients = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra("ingredients");
         steps = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra("steps");
-
 
         // Setup StepAdapter
         StepAdapter stepAdapter = new StepAdapter(steps, this);
@@ -59,7 +62,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
 
     public void showIngredients(View v) {
 
-        if (recipeDetailTabletFragment != null) {
+        if (isTablet()) {
 
             IngredientsDetailFragment ingredientsDetailFragment = new IngredientsDetailFragment(ingredients);
 
@@ -82,7 +85,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
         String stepDesc = steps.get(position).get(RecipeJsonParser.STEP_DESC);
 
 
-        if (recipeDetailTabletFragment != null) {
+        if (isTablet()) {
 
             StepFragment stepFragment = new StepFragment(stepDesc);
 
@@ -104,7 +107,15 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
             startActivity(intent);
         }
 
+    }
 
+    private boolean isTablet() {
+
+        if (findViewById(R.id.fragment_recipeDetail_tablet) != null) {
+            return true;
+        }
+
+        return false;
 
     }
 }

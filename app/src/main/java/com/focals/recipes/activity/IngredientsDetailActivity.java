@@ -26,15 +26,21 @@ public class IngredientsDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_ingredients);
         ButterKnife.bind(this);
 
-        // Get Ingredients from DetailActivity
-        ArrayList<HashMap<String, String>> ingredientsList = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra("ingredients");
 
-        // Setup IngredientAdapter
-        IngredientsAdapter ingredientsAdapter = new IngredientsAdapter(this, R.layout.activity_detail_ingredients_singleingredient, ingredientsList);
-        ingredientsListView.setDivider(null);
-        ingredientsListView.setAdapter(ingredientsAdapter);
 
-        // Set ActionBar Title
-        getSupportActionBar().setTitle(getIntent().getStringExtra("name"));
+
+
+
+
+//        // Get Ingredients from DetailActivity
+//        ArrayList<HashMap<String, String>> ingredientsList = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra("ingredients");
+//
+//        // Setup IngredientAdapter
+//        IngredientsAdapter ingredientsAdapter = new IngredientsAdapter(this, R.layout.activity_detail_ingredients_singleingredient, ingredientsList);
+//        ingredientsListView.setDivider(null);
+//        ingredientsListView.setAdapter(ingredientsAdapter);
+//
+//        // Set ActionBar Title
+//        getSupportActionBar().setTitle(getIntent().getStringExtra("name"));
     }
 }

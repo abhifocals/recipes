@@ -40,6 +40,14 @@ public class IngredientsDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
+        if (ingredients == null) {
+            ingredients = (ArrayList<HashMap<String, String>>) getActivity().getIntent().getSerializableExtra("ingredients");
+        }
+
+
+
+
         View view = inflater.inflate(R.layout.fragment_ingredients_detail, container, false);
 
         ButterKnife.bind(this, view);
