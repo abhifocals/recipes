@@ -12,6 +12,8 @@ import java.util.HashMap;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
 
@@ -57,12 +59,12 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
 
     class StepHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        @BindView(R.id.tv_stepShortDescription)
         TextView stepTextView;
 
         public StepHolder(@NonNull View view) {
             super(view);
-
-            stepTextView = view.findViewById(R.id.tv_stepShortDescription);
+            ButterKnife.bind(this, view);
 
             stepTextView.setOnClickListener(this);
         }

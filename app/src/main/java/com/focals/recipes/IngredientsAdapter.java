@@ -17,6 +17,8 @@ import java.util.zip.Inflater;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class IngredientsAdapter extends ArrayAdapter<HashMap<String, String>> {
 
@@ -29,19 +31,23 @@ public class IngredientsAdapter extends ArrayAdapter<HashMap<String, String>> {
         this.layoutRes = layoutRes;
     }
 
-    static class ViewHolder {
+    class ViewHolder {
+        @BindView(R.id.tv_ingredient)
         TextView ingredientTextView;
+
+        public ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        ViewHolder holder = new ViewHolder();
         LayoutInflater inflater = LayoutInflater.from(getContext());
-
         convertView = inflater.inflate(layoutRes, parent, false);
-        holder.ingredientTextView = convertView.findViewById(R.id.tv_ingredient);
+
+        ViewHolder holder = new ViewHolder(convertView);
 
         // Set name of Ingredient in TextView
         HashMap<String, String> currentIngredient = ingredientsList.get(position);

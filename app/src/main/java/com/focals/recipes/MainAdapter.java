@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainAdapter extends ArrayAdapter<Recipe> {
 
@@ -28,21 +30,26 @@ public class MainAdapter extends ArrayAdapter<Recipe> {
     }
 
     static class ViewHolder {
+
+        @BindView(R.id.recipeImage)
         ImageView recipeImageView;
+
+        @BindView(R.id.recipeTitle)
         TextView recipeTitleTextView;
+
+        public ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         Recipe recipe = getItem(position);
-        ViewHolder holder = new ViewHolder();
         LayoutInflater inflater = LayoutInflater.from(context);
         convertView = inflater.inflate(layoutResourceId, parent, false);
 
-        // Finding Views
-        holder.recipeImageView = (ImageView) convertView.findViewById(R.id.recipeImage);
-        holder.recipeTitleTextView = (TextView) convertView.findViewById(R.id.recipeTitle);
+        ViewHolder holder = new ViewHolder(convertView);
 
         // Setting View Data
         holder.recipeTitleTextView.setText(recipe.getName());
