@@ -1,6 +1,8 @@
 package com.focals.recipes;
 
 import androidx.appcompat.app.AppCompatActivity;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,15 +16,18 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    @BindView(R.id.listView)
+    ListView listView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        ButterKnife.bind(this);
 
         final ArrayList<Recipe> recipeList = RecipeJsonParser.getRecipes(this);
 
-        ListView listView = (ListView) findViewById(R.id.listView);
         MainAdapter mainAdapter = new MainAdapter(this, R.layout.activity_main_singlerecipe, recipeList);
 
         listView.setAdapter(mainAdapter);
@@ -48,5 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 }

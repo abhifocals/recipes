@@ -1,6 +1,8 @@
 package com.focals.recipes;
 
 import androidx.appcompat.app.AppCompatActivity;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import com.google.android.exoplayer2.SimpleExoPlayer;
 
 public class StepActivity extends AppCompatActivity {
 
+    @BindView(R.id.tv_stepDesc)
     TextView stepDescriptionTextView;
     SimpleExoPlayer player;
 
@@ -18,10 +21,9 @@ public class StepActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step);
+        ButterKnife.bind(this);
 
         Intent intent = getIntent();
-
-        stepDescriptionTextView = findViewById(R.id.tv_stepDesc);
 
         stepDescriptionTextView.setText(intent.getStringExtra("stepDesc"));
 

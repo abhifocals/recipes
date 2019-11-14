@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,11 +22,18 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
     private ArrayList<HashMap<String, String>> ingredients;
     private ArrayList<HashMap<String, String>> steps;
 
+    @BindView(R.id.rv_steps)
+    RecyclerView stepsRecyclerView;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_detail_recipe);
+
+        ButterKnife.bind(this);
 
         name = getIntent().getStringExtra("name");
         ingredients = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra("ingredients");
@@ -33,7 +42,6 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
 
         // Setup StepAdapter
         StepAdapter stepAdapter = new StepAdapter(steps, this);
-        RecyclerView stepsRecyclerView = findViewById(R.id.rv_steps);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
         stepsRecyclerView.setAdapter(stepAdapter);
