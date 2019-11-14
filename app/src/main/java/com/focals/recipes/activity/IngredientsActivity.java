@@ -7,7 +7,7 @@ import butterknife.ButterKnife;
 import android.os.Bundle;
 import android.widget.ListView;
 
-import com.focals.recipes.adapters.IngredientsAdapter;
+import com.focals.recipes.adapter.IngredientsAdapter;
 import com.focals.recipes.R;
 
 import java.util.ArrayList;

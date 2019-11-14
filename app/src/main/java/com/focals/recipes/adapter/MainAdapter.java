@@ -1,4 +1,4 @@
-package com.focals.recipes.adapters;
+package com.focals.recipes.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -1,4 +1,4 @@
-package com.focals.recipes.adapters;
+package com.focals.recipes.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,8 +12,6 @@ import com.focals.recipes.utils.RecipeJsonParser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.zip.Inflater;
 
 
 import androidx.annotation.NonNull;

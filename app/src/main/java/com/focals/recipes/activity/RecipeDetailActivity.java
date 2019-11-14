@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.focals.recipes.R;
-import com.focals.recipes.adapters.StepAdapter;
+import com.focals.recipes.adapter.StepAdapter;
 import com.focals.recipes.utils.RecipeJsonParser;
 
 import java.util.ArrayList;
