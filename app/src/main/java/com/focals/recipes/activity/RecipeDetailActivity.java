@@ -54,7 +54,22 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
 
     public void showIngredients(View v) {
 
-        Intent intent = new Intent(this, IngredientsActivity.class);
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+        Intent intent = new Intent(this, IngredientsDetailActivity.class);
         intent.putExtra("ingredients", ingredients);
         intent.putExtra("name", name);
 

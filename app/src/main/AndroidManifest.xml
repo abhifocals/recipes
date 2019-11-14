@@ -13,7 +13,7 @@
             android:name=".activity.StepActivity"
             android:parentActivityName=".activity.RecipeDetailActivity"></activity>
         <activity
-            android:name=".activity.IngredientsActivity"
+            android:name=".activity.IngredientsDetailActivity"
             android:parentActivityName=".activity.RecipeDetailActivity" />
         <activity
             android:name=".activity.RecipeDetailActivity"

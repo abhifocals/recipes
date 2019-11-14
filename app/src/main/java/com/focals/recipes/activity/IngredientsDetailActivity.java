@@ -13,7 +13,7 @@ import com.focals.recipes.R;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class IngredientsActivity extends AppCompatActivity {
+public class IngredientsDetailActivity extends AppCompatActivity {
 
 
     @BindView(R.id.lv_ingredients)
@@ -23,14 +23,14 @@ public class IngredientsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_ingredients);
+        setContentView(R.layout.activity_detail_ingredients);
         ButterKnife.bind(this);
 
         // Get Ingredients from DetailActivity
         ArrayList<HashMap<String, String>> ingredientsList = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra("ingredients");
 
         // Setup IngredientAdapter
-        IngredientsAdapter ingredientsAdapter = new IngredientsAdapter(this, R.layout.activity_ingredients_singleingredient, ingredientsList);
+        IngredientsAdapter ingredientsAdapter = new IngredientsAdapter(this, R.layout.activity_detail_ingredients_singleingredient, ingredientsList);
         ingredientsListView.setDivider(null);
         ingredientsListView.setAdapter(ingredientsAdapter);
 
