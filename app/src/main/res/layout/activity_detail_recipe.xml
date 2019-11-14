@@ -16,17 +16,13 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="40sp"
-        android:text="See Ingredients"
+        android:drawableEnd="@drawable/ic_keyboard_arrow_right_black_24dp"
+        android:gravity="left"
         android:onClick="showIngredients"
-        android:textAllCaps="false"></Button>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Steps: "
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+        android:text="Ingredients"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"></Button>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_steps"

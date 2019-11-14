@@ -6,12 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
+    <Button
         android:id="@+id/tv_stepShortDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Step Description"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:gravity="left"
+        android:drawableEnd="@drawable/ic_keyboard_arrow_right_black_24dp"
+        android:textStyle="bold"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
