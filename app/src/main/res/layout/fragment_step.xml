@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.StepFragment">
+
+    <!--    <com.google.android.exoplayer2.ui.PlayerView-->
+    <!--        android:id="@+id/playerView"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="300dp"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"></com.google.android.exoplayer2.ui.PlayerView>-->
+
+
+    <TextView
+        android:id="@+id/tv_stepDesc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="56dp"
+        android:text="Instructions Here"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"></TextView>
+
+    <!--    <Button-->
+    <!--        android:id="@+id/button_previousStep"-->
+    <!--        android:layout_width="53dp"-->
+    <!--        android:layout_height="17dp"-->
+    <!--        android:layout_marginTop="76dp"-->
+    <!--        android:layout_marginEnd="120dp"-->
+    <!--        android:text="Previous Step"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/tv_stepDesc"></Button>-->
+
+    <!--    <Button-->
+    <!--        android:id="@+id/button_nextStep"-->
+    <!--        android:layout_width="50dp"-->
+    <!--        android:layout_height="20dp"-->
+    <!--        android:layout_marginTop="76dp"-->
+    <!--        android:layout_marginEnd="80dp"-->
+    <!--        android:text="Next Step"-->
+    <!--        app:layout_constraintEnd_toStartOf="@+id/button_previousStep"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/tv_stepDesc"></Button>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
