@@ -39,13 +39,15 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
         stepsRecyclerView.setAdapter(stepAdapter);
         stepsRecyclerView.setLayoutManager(linearLayoutManager);
 
-
+        // Set ActionBar Title
+        getSupportActionBar().setTitle(name);
     }
 
     public void showIngredients(View v) {
 
         Intent intent = new Intent(this, IngredientsActivity.class);
         intent.putExtra("ingredients", ingredients);
+        intent.putExtra("name", name);
 
         startActivity(intent);
     }
@@ -60,6 +62,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
         Intent intent = new Intent(this, StepActivity.class);
 
         intent.putExtra("stepDesc", stepDesc);
+        intent.putExtra("name", name);
 
         startActivity(intent);
     }

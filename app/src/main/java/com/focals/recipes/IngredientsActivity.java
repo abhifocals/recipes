@@ -25,5 +25,8 @@ public class IngredientsActivity extends AppCompatActivity {
         ingredientsListView.setDivider(null);
 
         ingredientsListView.setAdapter(ingredientsAdapter);
+
+        // Set ActionBar Title
+        getSupportActionBar().setTitle(getIntent().getStringExtra("name"));
     }
 }
