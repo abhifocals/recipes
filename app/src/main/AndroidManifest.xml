@@ -10,16 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".StepActivity"
-            android:parentActivityName=".RecipeDetailActivity"></activity>
+            android:name=".activity.StepActivity"
+            android:parentActivityName=".activity.RecipeDetailActivity"></activity>
         <activity
-            android:name=".IngredientsActivity"
-            android:parentActivityName=".RecipeDetailActivity" />
+            android:name=".activity.IngredientsActivity"
+            android:parentActivityName=".activity.RecipeDetailActivity" />
         <activity
-            android:name=".RecipeDetailActivity"
+            android:name=".activity.RecipeDetailActivity"
             android:launchMode="singleTop"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".MainActivity">
+            android:parentActivityName=".activity.MainActivity" />
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

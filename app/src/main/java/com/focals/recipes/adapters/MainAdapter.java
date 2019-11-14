@@ -1,4 +1,4 @@
-package com.focals.recipes;
+package com.focals.recipes.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.focals.recipes.R;
+import com.focals.recipes.utils.Recipe;
 
 import java.util.ArrayList;
 

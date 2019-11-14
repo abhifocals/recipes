@@ -1,4 +1,4 @@
-package com.focals.recipes;
+package com.focals.recipes.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.focals.recipes.adapters.MainAdapter;
+import com.focals.recipes.R;
+import com.focals.recipes.utils.Recipe;
 import com.focals.recipes.utils.RecipeJsonParser;
 
 import java.util.ArrayList;

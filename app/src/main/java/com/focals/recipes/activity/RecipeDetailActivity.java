@@ -1,7 +1,6 @@
-package com.focals.recipes;
+package com.focals.recipes.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -11,6 +10,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.focals.recipes.R;
+import com.focals.recipes.adapters.StepAdapter;
 import com.focals.recipes.utils.RecipeJsonParser;
 
 import java.util.ArrayList;

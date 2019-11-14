@@ -1,4 +1,4 @@
-package com.focals.recipes;
+package com.focals.recipes.utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;

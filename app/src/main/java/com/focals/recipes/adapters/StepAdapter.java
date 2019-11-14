@@ -1,10 +1,11 @@
-package com.focals.recipes;
+package com.focals.recipes.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.focals.recipes.R;
 import com.focals.recipes.utils.RecipeJsonParser;
 
 import java.util.ArrayList;

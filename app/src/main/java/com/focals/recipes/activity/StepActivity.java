@@ -1,4 +1,4 @@
-package com.focals.recipes;
+package com.focals.recipes.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.focals.recipes.R;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 
 public class StepActivity extends AppCompatActivity {
