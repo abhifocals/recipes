@@ -26,7 +26,7 @@ public class StepActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        stepDescriptionTextView.setText(intent.getStringExtra("stepDesc"));
+//        stepDescriptionTextView.setText(intent.getStringExtra("stepDesc"));
 
         // Set ActionBar Title
         getSupportActionBar().setTitle(getIntent().getStringExtra("name"));

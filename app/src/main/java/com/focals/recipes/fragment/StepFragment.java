@@ -43,6 +43,10 @@ public class StepFragment extends Fragment {
         ButterKnife.bind(this, view);
 
 
+        if (stepDesc == null) {
+            stepDesc = getActivity().getIntent().getStringExtra("stepDesc");
+        }
+
         stepDescriptionTextView.setText(stepDesc);
 
         return view;
