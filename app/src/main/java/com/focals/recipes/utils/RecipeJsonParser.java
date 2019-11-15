@@ -23,9 +23,9 @@ public class RecipeJsonParser {
     public static final String STEP_VIDEO = "videoURL";
     public static final String STEP_THUMBNAIL = "thumbnailURL";
 
-    private static ArrayList<Recipe> recipes = new ArrayList<>();
+    private ArrayList<Recipe> recipes = new ArrayList<>();
 
-    public static ArrayList<Recipe> getRecipes(Context context) {
+    public ArrayList<Recipe> getRecipes(Context context) {
 
         try {
             JSONArray recipeArray = new JSONArray(readJsonFromAssets(context));
