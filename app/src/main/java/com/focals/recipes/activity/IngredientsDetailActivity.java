@@ -25,5 +25,8 @@ public class IngredientsDetailActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_detail_ingredients);
         ButterKnife.bind(this);
+
+        getSupportActionBar().setTitle(getIntent().getStringExtra("name"));
+
     }
 }
