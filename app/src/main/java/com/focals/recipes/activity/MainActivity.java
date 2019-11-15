@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.GridView;
 
 import com.focals.recipes.adapter.MainAdapter;
 import com.focals.recipes.R;
@@ -20,8 +20,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
 
-    @BindView(R.id.listView)
-    ListView listView;
+    @BindView(R.id.gridView)
+    GridView gridView;
 
     ArrayList<Recipe> recipeList;
 
@@ -32,13 +32,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        recipeList = RecipeJsonParser.getRecipes(this);
+        RecipeJsonParser parser = new RecipeJsonParser();
+
+
+        recipeList = parser.getRecipes(this);
+
 
         MainAdapter mainAdapter = new MainAdapter(this, R.layout.activity_main_singlerecipe, recipeList);
 
-        listView.setAdapter(mainAdapter);
-
-
+        gridView.setAdapter(mainAdapter);
 
 
     }
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
