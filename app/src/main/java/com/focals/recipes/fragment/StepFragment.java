@@ -35,6 +35,7 @@ import com.google.android.exoplayer2.source.TrackGroupArray;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.trackselection.TrackSelector;
+import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
@@ -48,7 +49,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
     TextView stepDescriptionTextView;
 
     @BindView(R.id.playerView)
-    SimpleExoPlayerView playerView;
+    PlayerView playerView;
     SimpleExoPlayer simpleExoPlayer;
     static MediaSessionCompat mediaSession;
     PlaybackStateCompat.Builder playbackStateBuilder;
@@ -151,10 +152,10 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
 
     }
 
-    @Override
-    public void onTimelineChanged(Timeline timeline, Object manifest) {
-
-    }
+//    @Override
+//    public void onTimelineChanged(Timeline timeline, Object manifest) {
+//
+//    }
 
     @Override
     public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
@@ -186,10 +187,10 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
 
     }
 
-    @Override
-    public void onPositionDiscontinuity() {
-
-    }
+//    @Override
+//    public void onPositionDiscontinuity() {
+//
+//    }
 
     public static class MediaReceiver extends BroadcastReceiver {
 
