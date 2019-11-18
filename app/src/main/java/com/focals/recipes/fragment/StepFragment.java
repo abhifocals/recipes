@@ -51,8 +51,6 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
     @BindView(R.id.playerView)
     PlayerView playerView;
     SimpleExoPlayer simpleExoPlayer;
-    static MediaSessionCompat mediaSession;
-    PlaybackStateCompat.Builder playbackStateBuilder;
 
 
     String stepDesc;
@@ -75,27 +73,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
         ButterKnife.bind(this, view);
         Uri sampleUri = Uri.parse("https://d17h27t6h515a5.cloudfront.net/topher/2017/April/58ffddf0_-intro-yellow-cake/-intro-yellow-cake.mp4");
 
-
-        initializeMediaSession();
-
-
-        if (simpleExoPlayer == null) {
-            // Create an instance of the ExoPlayer.
-            TrackSelector trackSelector = new DefaultTrackSelector();
-            LoadControl loadControl = new DefaultLoadControl();
-            simpleExoPlayer = ExoPlayerFactory.newSimpleInstance(getActivity(), trackSelector, loadControl);
-            playerView.setPlayer(simpleExoPlayer);
-
-            // Set the ExoPlayer.EventListener to this activity.
-            simpleExoPlayer.addListener(this);
-
-            // Prepare the MediaSource.
-            String userAgent = Util.getUserAgent(getActivity(), "MyRecipes");
-            MediaSource mediaSource = new ExtractorMediaSource(sampleUri, new DefaultDataSourceFactory(
-                    getActivity(), userAgent), new DefaultExtractorsFactory(), null, null);
-            simpleExoPlayer.prepare(mediaSource);
-            simpleExoPlayer.setPlayWhenReady(true);
-        }
+        initializePlayer(sampleUri);
 
         if (stepDesc == null) {
             stepDesc = getActivity().getIntent().getStringExtra("stepDesc");
@@ -106,6 +84,27 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
         return view;
 
 
+    }
+
+    private void initializePlayer(Uri sampleUri) {
+        if (simpleExoPlayer == null) {
+
+            // Create an instance of the ExoPlayer.
+            simpleExoPlayer = ExoPlayerFactory.newSimpleInstance(getActivity(), new DefaultTrackSelector(), new DefaultLoadControl());
+
+            // Set the Player in the PlayerView
+            playerView.setPlayer(simpleExoPlayer);
+
+            // Set the Player EventListener
+            simpleExoPlayer.addListener(this);
+
+            // Prepare the MediaSource.
+            String userAgent = Util.getUserAgent(getActivity(), "MyRecipes");
+            MediaSource mediaSource = new ExtractorMediaSource(sampleUri, new DefaultDataSourceFactory(
+                    getActivity(), userAgent), new DefaultExtractorsFactory(), null, null);
+            simpleExoPlayer.prepare(mediaSource);
+            simpleExoPlayer.setPlayWhenReady(true);
+        }
     }
 
     @Override
@@ -119,43 +118,6 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
         simpleExoPlayer.release();
         simpleExoPlayer = null;
     }
-
-    private void initializeMediaSession() {
-
-        // Create a MediaSessionCompat.
-        mediaSession = new MediaSessionCompat(getActivity(), getActivity().getClass().getSimpleName());
-
-        // Enable callbacks from MediaButtons and TransportControls.
-        mediaSession.setFlags(
-                MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS |
-                        MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS);
-
-        // Do not let MediaButtons restart the player when the app is not visible.
-        mediaSession.setMediaButtonReceiver(null);
-
-        // Set an initial PlaybackState with ACTION_PLAY, so media buttons can start the player.
-        playbackStateBuilder = new PlaybackStateCompat.Builder()
-                .setActions(
-                        PlaybackStateCompat.ACTION_PLAY |
-                                PlaybackStateCompat.ACTION_PAUSE |
-                                PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS |
-                                PlaybackStateCompat.ACTION_PLAY_PAUSE);
-
-        mediaSession.setPlaybackState(playbackStateBuilder.build());
-
-
-        // MySessionCallback has methods that handle callbacks from a media controller.
-//        mediaSession.setCallback(new MySessionCallback());
-
-        // Start the Media Session since the activity is active.
-        mediaSession.setActive(true);
-
-    }
-
-//    @Override
-//    public void onTimelineChanged(Timeline timeline, Object manifest) {
-//
-//    }
 
     @Override
     public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
@@ -172,31 +134,15 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
 
 
         if ((playbackState == ExoPlayer.STATE_READY) && playWhenReady) {
-            playbackStateBuilder.setState(PlaybackStateCompat.STATE_PLAYING,
-                    simpleExoPlayer.getCurrentPosition(), 1f);
+
         } else if ((playbackState == ExoPlayer.STATE_READY)) {
-            playbackStateBuilder.setState(PlaybackStateCompat.STATE_PAUSED,
-                    simpleExoPlayer.getCurrentPosition(), 1f);
+
         }
-        mediaSession.setPlaybackState(playbackStateBuilder.build());
 
     }
 
     @Override
     public void onPlayerError(ExoPlaybackException error) {
 
-    }
-
-//    @Override
-//    public void onPositionDiscontinuity() {
-//
-//    }
-
-    public static class MediaReceiver extends BroadcastReceiver {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            MediaButtonReceiver.handleIntent(mediaSession, intent);
-        }
     }
 }
