@@ -19,7 +19,7 @@
         <ImageButton android:id="@id/exo_prev"
             style="@style/ExoMediaButton.Previous"/>
 
-<!--        <ImageButton android:id="@id/exo_rew"-->
+<!--        <ImageButton android:id="@id/exo_rew" TODO: Remove commented out code-->
 <!--            style="@style/ExoMediaButton.Rewind"/>-->
 
         <ImageButton android:id="@id/exo_shuffle"
