@@ -83,6 +83,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
     public void onStepClick(int position) {
 
         String stepDesc = steps.get(position).get(RecipeJsonParser.STEP_DESC);
+        String videoUrl = steps.get(position).get(RecipeJsonParser.STEP_VIDEO);
 
 
         if (isTablet()) {
@@ -103,6 +104,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
 
             intent.putExtra("stepDesc", stepDesc);
             intent.putExtra("name", name);
+            intent.putExtra("videourl", videoUrl);
 
             startActivity(intent);
         }

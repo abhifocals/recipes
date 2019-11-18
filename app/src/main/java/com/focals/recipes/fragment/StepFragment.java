@@ -52,9 +52,8 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
     @BindView(R.id.playerView)
     PlayerView playerView;
     SimpleExoPlayer simpleExoPlayer;
-
-
     String stepDesc;
+    Uri videoUri;
 
     public StepFragment() {
         // Required empty public constructor
@@ -74,13 +73,16 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
         ButterKnife.bind(this, view);
         Uri sampleUri = Uri.parse("https://d17h27t6h515a5.cloudfront.net/topher/2017/April/58ffddf0_-intro-yellow-cake/-intro-yellow-cake.mp4");
 
-        initializePlayer(sampleUri);
+
 
         if (stepDesc == null) {
             stepDesc = getActivity().getIntent().getStringExtra("stepDesc");
+            videoUri = Uri.parse(getActivity().getIntent().getStringExtra("videourl"));
         }
 
         stepDescriptionTextView.setText(stepDesc);
+
+        initializePlayer(videoUri);
 
         return view;
 
