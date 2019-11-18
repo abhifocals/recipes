@@ -1,6 +1,7 @@
 package com.focals.recipes.fragment;
 
 
+import android.media.session.MediaSession;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -8,6 +9,8 @@ import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import android.support.v4.media.session.MediaSessionCompat;
+import android.support.v4.media.session.PlaybackStateCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +41,9 @@ public class StepFragment extends Fragment {
     @BindView(R.id.playerView)
     SimpleExoPlayerView playerView;
     SimpleExoPlayer simpleExoPlayer;
+    MediaSessionCompat mediaSession;
+    PlaybackStateCompat.Builder playbackStateBuilder;
+
 
     String stepDesc;
 
@@ -57,7 +63,13 @@ public class StepFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_step, container, false);
 
         ButterKnife.bind(this, view);
-        Uri sampleUri = Uri.parse("https://d17h27t6h515a5.cloudfront.net/topher/2017/April/58ffdcf9_9-final-product-brownies/9-final-product-brownies.mp4");
+        Uri sampleUri = Uri.parse("https://d17h27t6h515a5.cloudfront.net/topher/2017/April/58ffddf0_-intro-yellow-cake/-intro-yellow-cake.mp4");
+
+
+
+        initializeMediaSession();
+
+
 
         if (simpleExoPlayer == null) {
             // Create an instance of the ExoPlayer.
@@ -74,14 +86,58 @@ public class StepFragment extends Fragment {
             simpleExoPlayer.setPlayWhenReady(true);
         }
 
-            if (stepDesc == null) {
-                stepDesc = getActivity().getIntent().getStringExtra("stepDesc");
-            }
+        if (stepDesc == null) {
+            stepDesc = getActivity().getIntent().getStringExtra("stepDesc");
+        }
 
-            stepDescriptionTextView.setText(stepDesc);
+        stepDescriptionTextView.setText(stepDesc);
 
-            return view;
+        return view;
 
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        releasePlayer();
+    }
+
+    private void releasePlayer() {
+        simpleExoPlayer.stop();
+        simpleExoPlayer.release();
+        simpleExoPlayer = null;
+    }
+
+    private void initializeMediaSession() {
+
+        // Create a MediaSessionCompat.
+        mediaSession = new MediaSessionCompat(getActivity(), getActivity().getClass().getSimpleName());
+
+        // Enable callbacks from MediaButtons and TransportControls.
+        mediaSession.setFlags(
+                MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS |
+                        MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS);
+
+        // Do not let MediaButtons restart the player when the app is not visible.
+        mediaSession.setMediaButtonReceiver(null);
+
+        // Set an initial PlaybackState with ACTION_PLAY, so media buttons can start the player.
+        playbackStateBuilder = new PlaybackStateCompat.Builder()
+                .setActions(
+                        PlaybackStateCompat.ACTION_PLAY |
+                                PlaybackStateCompat.ACTION_PAUSE |
+                                PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS |
+                                PlaybackStateCompat.ACTION_PLAY_PAUSE);
+
+        mediaSession.setPlaybackState(playbackStateBuilder.build());
+
+
+        // MySessionCallback has methods that handle callbacks from a media controller.
+//        mediaSession.setCallback(new MySessionCallback());
+
+        // Start the Media Session since the activity is active.
+        mediaSession.setActive(true);
 
     }
 }
