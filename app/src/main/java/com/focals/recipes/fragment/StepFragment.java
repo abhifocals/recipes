@@ -37,6 +37,7 @@ import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
+import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
@@ -99,14 +100,12 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
             simpleExoPlayer.addListener(this);
 
             // Prepare the MediaSource.
-            String userAgent = Util.getUserAgent(getActivity(), "MyRecipes");
             MediaSource mediaSource = new ExtractorMediaSource(sampleUri, new DefaultDataSourceFactory(
-                    getActivity(), userAgent), new DefaultExtractorsFactory(), null, null);
+                    getActivity(), "MyRecipes"), new DefaultExtractorsFactory(), null, null);
             simpleExoPlayer.prepare(mediaSource);
             simpleExoPlayer.setPlayWhenReady(true);
         }
     }
-
 
     @Override
     public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
