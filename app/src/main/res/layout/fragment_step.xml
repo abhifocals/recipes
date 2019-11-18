@@ -6,41 +6,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.StepFragment">
 
-    <!--    <com.google.android.exoplayer2.ui.PlayerView-->
-    <!--        android:id="@+id/playerView"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="300dp"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"></com.google.android.exoplayer2.ui.PlayerView>-->
+    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+        android:id="@+id/playerView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></com.google.android.exoplayer2.ui.SimpleExoPlayerView>
 
 
     <TextView
         android:id="@+id/tv_stepDesc"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="56dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:text="Instructions Here"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/playerView"
+        android:layout_marginLeft="15dp"></TextView>
 
-    <!--    <Button-->
-    <!--        android:id="@+id/button_previousStep"-->
-    <!--        android:layout_width="53dp"-->
-    <!--        android:layout_height="17dp"-->
-    <!--        android:layout_marginTop="76dp"-->
-    <!--        android:layout_marginEnd="120dp"-->
-    <!--        android:text="Previous Step"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/tv_stepDesc"></Button>-->
+    <Button
+        android:id="@+id/button_previousStep"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginBottom="28dp"
+        android:text="Previous Step"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"></Button>
 
-    <!--    <Button-->
-    <!--        android:id="@+id/button_nextStep"-->
-    <!--        android:layout_width="50dp"-->
-    <!--        android:layout_height="20dp"-->
-    <!--        android:layout_marginTop="76dp"-->
-    <!--        android:layout_marginEnd="80dp"-->
-    <!--        android:text="Next Step"-->
-    <!--        app:layout_constraintEnd_toStartOf="@+id/button_previousStep"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/tv_stepDesc"></Button>-->
+    <Button
+        android:id="@+id/button_nextStep"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="28dp"
+        android:text="Next Step"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"></Button>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
