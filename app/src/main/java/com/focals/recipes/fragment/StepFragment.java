@@ -107,16 +107,16 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
         }
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        releasePlayer();
-    }
 
-    private void releasePlayer() {
-        simpleExoPlayer.stop();
-        simpleExoPlayer.release();
-        simpleExoPlayer = null;
+    @Override
+    public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+
+        if ((playbackState == ExoPlayer.STATE_READY) && playWhenReady) {
+
+        } else if ((playbackState == ExoPlayer.STATE_READY)) {
+
+        }
+
     }
 
     @Override
@@ -130,19 +130,19 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
     }
 
     @Override
-    public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
-
-
-        if ((playbackState == ExoPlayer.STATE_READY) && playWhenReady) {
-
-        } else if ((playbackState == ExoPlayer.STATE_READY)) {
-
-        }
+    public void onPlayerError(ExoPlaybackException error) {
 
     }
 
     @Override
-    public void onPlayerError(ExoPlaybackException error) {
+    public void onDestroy() {
+        super.onDestroy();
+        releasePlayer();
+    }
 
+    private void releasePlayer() {
+        simpleExoPlayer.stop();
+        simpleExoPlayer.release();
+        simpleExoPlayer = null;
     }
 }
