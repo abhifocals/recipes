@@ -1,11 +1,15 @@
 package com.focals.recipes.fragment;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.media.session.MediaSession;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.media.session.MediaButtonReceiver;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -46,7 +50,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
     @BindView(R.id.playerView)
     SimpleExoPlayerView playerView;
     SimpleExoPlayer simpleExoPlayer;
-    MediaSessionCompat mediaSession;
+    static MediaSessionCompat mediaSession;
     PlaybackStateCompat.Builder playbackStateBuilder;
 
 
@@ -185,5 +189,13 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
     @Override
     public void onPositionDiscontinuity() {
 
+    }
+
+    public static class MediaReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            MediaButtonReceiver.handleIntent(mediaSession, intent);
+        }
     }
 }
