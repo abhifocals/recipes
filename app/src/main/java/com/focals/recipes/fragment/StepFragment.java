@@ -67,9 +67,6 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
     private ArrayList<HashMap<String, String>> currentRecipeSteps;
     private long playerCurrentPosition;
 
-
-    StepChangeHandler stepChangeHandler;
-
     public StepFragment() {
         // Required empty public constructor
     }
@@ -93,7 +90,6 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
         }
 
         stepDescriptionTextView.setText(stepDesc);
-
 
 
         previousButton.setOnClickListener(this);
@@ -123,9 +119,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
         if (TextUtils.isEmpty(mediaUri.toString())) {
 
             showNoVideoToast();
-        }
-
-else {
+        } else {
             if (simpleExoPlayer == null) {
 
                 // Create an instance of the ExoPlayer.
@@ -157,8 +151,7 @@ else {
 
         if (TextUtils.isEmpty(mediaUri.toString())) {
             showNoVideoToast();
-        }
-        else {
+        } else {
             mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
                     getActivity(), "MyRecipes"), new DefaultExtractorsFactory(), null, null);
             simpleExoPlayer.prepare(mediaSource);
@@ -253,10 +246,6 @@ else {
         }
     }
 
-    public interface StepChangeHandler {
-        void onStepChange(int position);
-    }
-
     private void setButtonStatus() {
 
         // Previous Step Button
@@ -283,8 +272,8 @@ else {
     private void setFullScreen() {
 
         ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) playerView.getLayoutParams();
-        params.width=params.MATCH_PARENT;
-        params.height=params.MATCH_PARENT;
+        params.width = params.MATCH_PARENT;
+        params.height = params.MATCH_PARENT;
 
         playerView.setLayoutParams(params);
 
