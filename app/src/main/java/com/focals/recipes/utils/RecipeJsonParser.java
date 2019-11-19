@@ -25,7 +25,7 @@ public class RecipeJsonParser {
 
     private static ArrayList<Recipe> recipes = new ArrayList<>();
 
-    public static ArrayList<Recipe> getRecipes(Context context) {
+    public static ArrayList<Recipe> parseRecipes(Context context) {
 
         try {
             JSONArray recipeArray = new JSONArray(readJsonFromAssets(context));
