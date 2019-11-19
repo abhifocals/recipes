@@ -33,6 +33,7 @@ import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,6 +59,8 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
     int currentStepPosition;
     int currentRecipePosition;
     MediaSource mediaSource;
+    private Recipe currentRecipe;
+    private ArrayList<HashMap<String, String>> currentRecipeSteps;
 
 
     StepChangeHandler stepChangeHandler;
@@ -88,12 +91,13 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
         initializePlayer(videoUri);
 
 
-
         previousButton.setOnClickListener(this);
         nextButton.setOnClickListener(this);
         recipes = RecipeJsonParser.getRecipes();
         currentStepPosition = getActivity().getIntent().getIntExtra("stepPosition", -1);
         currentRecipePosition = getActivity().getIntent().getIntExtra("recipePosition", -1);
+        currentRecipe = recipes.get(currentRecipePosition);
+        currentRecipeSteps = currentRecipe.getSteps();
 
         return view;
 
@@ -112,11 +116,15 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
             simpleExoPlayer.addListener(this);
 
             // Prepare the MediaSource.
-            mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
-                    getActivity(), "MyRecipes"), new DefaultExtractorsFactory(), null, null);
-            simpleExoPlayer.prepare(mediaSource);
-            simpleExoPlayer.setPlayWhenReady(true);
+            prepareMediaSource(mediaUri);
         }
+    }
+
+    private void prepareMediaSource(Uri mediaUri) {
+        mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
+                getActivity(), "MyRecipes"), new DefaultExtractorsFactory(), null, null);
+        simpleExoPlayer.prepare(mediaSource);
+        simpleExoPlayer.setPlayWhenReady(true);
     }
 
     @Override
@@ -167,24 +175,17 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
 
             case R.id.button_previousStep:
 
+                if (currentStepPosition > 0) {
 
-                if (currentStepPosition > 0)  {
+                    currentRecipePosition = currentStepPosition - 1;
 
-                    currentRecipePosition = currentStepPosition -1;
-
-
-
-                    newDesc = recipes.get(currentRecipePosition).getSteps().get(currentStepPosition-1).get(RecipeJsonParser.STEP_DESC);
+                    newDesc = currentRecipeSteps.get(currentStepPosition - 1).get(RecipeJsonParser.STEP_DESC);
 
                     stepDescriptionTextView.setText(newDesc);
-                    
-                    Uri uri = Uri.parse(recipes.get(currentRecipePosition).getSteps().get(currentStepPosition-1).get(RecipeJsonParser.STEP_VIDEO));
 
-                    mediaSource = new ExtractorMediaSource(uri, new DefaultDataSourceFactory(
-                            getActivity(), "MyRecipes"), new DefaultExtractorsFactory(), null, null);
-                    simpleExoPlayer.prepare(mediaSource);
-                    simpleExoPlayer.setPlayWhenReady(true);
+                    videoUri = Uri.parse(currentRecipeSteps.get(currentStepPosition-1).get(RecipeJsonParser.STEP_VIDEO));
 
+                    prepareMediaSource(videoUri);
 
                 }
 
@@ -196,7 +197,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
         }
     }
 
-    public interface StepChangeHandler{
+    public interface StepChangeHandler {
         void onStepChange(int position);
     }
 }
