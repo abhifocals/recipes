@@ -70,50 +70,30 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
             IngredientsDetailFragment ingredientsDetailFragment = new IngredientsDetailFragment(ingredients);
 
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_tabletRight, ingredientsDetailFragment).commit();
-        }
-
-        else {
+        } else {
             Intent intent = new Intent(this, IngredientsDetailActivity.class);
             intent.putExtra("ingredients", ingredients);
             intent.putExtra("name", name);
 
             startActivity(intent);
         }
-
     }
 
     @Override
     public void onStepClick(int stepPosition) {
 
-        String stepDesc = steps.get(stepPosition).get(RecipeJsonParser.STEP_DESC);
-        String videoUrl = steps.get(stepPosition).get(RecipeJsonParser.STEP_VIDEO);
-
-
         if (isTablet()) {
-
             StepFragment stepFragment = new StepFragment(recipePosition, stepPosition);
-
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_tabletRight, stepFragment).commit();
-
-
-
-        }
-
-
-        else {
+        } else {
             // Get current Step info
 
             Intent intent = new Intent(this, StepActivity.class);
-
-//            intent.putExtra("stepDesc", stepDesc);
-//            intent.putExtra("name", name);
-//            intent.putExtra("videourl", videoUrl);
             intent.putExtra("stepPosition", stepPosition);
             intent.putExtra("recipePosition", recipePosition);
 
             startActivity(intent);
         }
-
     }
 
     private boolean isTablet() {
@@ -123,6 +103,5 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
         }
 
         return false;
-
     }
 }

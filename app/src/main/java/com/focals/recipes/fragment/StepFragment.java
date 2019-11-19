@@ -146,7 +146,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
             }
 
 
-            if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && !isTablet) {
                 setFullScreen();
             }
         }
