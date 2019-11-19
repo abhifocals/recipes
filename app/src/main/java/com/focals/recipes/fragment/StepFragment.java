@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -272,7 +273,12 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
     }
 
     private void showNoVideoToast() {
-        Toast.makeText(getActivity(), "No video is available for this step", Toast.LENGTH_LONG).show();
+        Toast toast = Toast.makeText(getActivity(), "No video is available for this step", Toast.LENGTH_LONG);
+
+        LinearLayout linearLayout = (LinearLayout) toast.getView();
+        TextView textView = (TextView) linearLayout.getChildAt(0);
+        textView.setTextSize(25);
+        toast.show();
     }
 
     private void setFullScreen() {
