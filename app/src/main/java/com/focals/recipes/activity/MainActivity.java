@@ -32,11 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        RecipeJsonParser parser = new RecipeJsonParser();
-
-
-        recipeList = parser.getRecipes(this);
-
+        recipeList = RecipeJsonParser.getRecipes(this);
 
         MainAdapter mainAdapter = new MainAdapter(this, R.layout.activity_main_singlerecipe, recipeList);
 
