@@ -118,7 +118,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
 
         if (TextUtils.isEmpty(mediaUri.toString())) {
 
-            showNoVideoToast();
+            showNoVideoToast(); //TODO: use return here  instead  of else below
         } else {
             if (simpleExoPlayer == null) {
 
@@ -151,12 +151,12 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
 
         if (TextUtils.isEmpty(mediaUri.toString())) {
             showNoVideoToast();
-        } else {
-            mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
-                    getActivity(), "MyRecipes"), new DefaultExtractorsFactory(), null, null);
-            simpleExoPlayer.prepare(mediaSource);
-            simpleExoPlayer.setPlayWhenReady(true); //TODO: needed?
         }
+        mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
+                getActivity(), "MyRecipes"), new DefaultExtractorsFactory(), null, null);
+        simpleExoPlayer.prepare(mediaSource);
+        simpleExoPlayer.setPlayWhenReady(true); //TODO: needed?
+
     }
 
     @Override
