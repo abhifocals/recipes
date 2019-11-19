@@ -86,10 +86,9 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
 
         return view;
 
-
     }
 
-    private void initializePlayer(Uri sampleUri) {
+    private void initializePlayer(Uri mediaUri) {
         if (simpleExoPlayer == null) {
 
             // Create an instance of the ExoPlayer.
@@ -102,7 +101,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
             simpleExoPlayer.addListener(this);
 
             // Prepare the MediaSource.
-            MediaSource mediaSource = new ExtractorMediaSource(sampleUri, new DefaultDataSourceFactory(
+            MediaSource mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
                     getActivity(), "MyRecipes"), new DefaultExtractorsFactory(), null, null);
             simpleExoPlayer.prepare(mediaSource);
             simpleExoPlayer.setPlayWhenReady(true);
