@@ -60,6 +60,9 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
     @BindView(R.id.button_nextStep)
     Button nextButton;
 
+    @BindView(R.id.exo_play)
+    View playButton;
+
     ArrayList<Recipe> recipes;
     int currentStepPosition;
     int currentRecipePosition;
@@ -120,6 +123,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
 
         previousButton.setOnClickListener(this);
         nextButton.setOnClickListener(this);
+        playButton.setOnClickListener(this);
 
         return view;
 
@@ -250,6 +254,12 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
                 setButtonStatus();
 
                 break;
+
+
+            case R.id.exo_play:
+                if  (currentRecipeSteps.get(currentStepPosition).get(RecipeJsonParser.STEP_VIDEO).isEmpty()) {
+                    showNoVideoToast();
+                }
         }
     }
 
@@ -273,7 +283,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
     }
 
     private void showNoVideoToast() {
-        Toast toast = Toast.makeText(getActivity(), "No video is available for this step", Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(getActivity(), "No video is available for this step.", Toast.LENGTH_LONG);
 
         LinearLayout linearLayout = (LinearLayout) toast.getView();
         TextView textView = (TextView) linearLayout.getChildAt(0);
