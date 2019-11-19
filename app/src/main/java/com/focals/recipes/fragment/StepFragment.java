@@ -177,8 +177,6 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
 
                 if (currentStepPosition > 0) {
 
-                    currentRecipePosition = currentStepPosition - 1;
-
                     newDesc = currentRecipeSteps.get(currentStepPosition - 1).get(RecipeJsonParser.STEP_DESC);
 
                     stepDescriptionTextView.setText(newDesc);
@@ -186,6 +184,8 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
                     videoUri = Uri.parse(currentRecipeSteps.get(currentStepPosition-1).get(RecipeJsonParser.STEP_VIDEO));
 
                     prepareMediaSource(videoUri);
+
+                    currentStepPosition = currentStepPosition - 1;
 
                 }
 
