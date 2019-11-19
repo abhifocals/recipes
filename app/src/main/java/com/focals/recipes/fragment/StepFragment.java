@@ -176,23 +176,24 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
             case R.id.button_previousStep:
 
                 if (currentStepPosition > 0) {
-
                     newDesc = currentRecipeSteps.get(currentStepPosition - 1).get(RecipeJsonParser.STEP_DESC);
-
                     stepDescriptionTextView.setText(newDesc);
-
                     videoUri = Uri.parse(currentRecipeSteps.get(currentStepPosition-1).get(RecipeJsonParser.STEP_VIDEO));
-
                     prepareMediaSource(videoUri);
-
                     currentStepPosition = currentStepPosition - 1;
-
                 }
-
-
                 break;
 
             case R.id.button_nextStep:
+
+                if (currentStepPosition < currentRecipeSteps.size()-1) {
+                    newDesc = currentRecipeSteps.get(currentStepPosition + 1).get(RecipeJsonParser.STEP_DESC);
+                    stepDescriptionTextView.setText(newDesc);
+                    videoUri = Uri.parse(currentRecipeSteps.get(currentStepPosition + 1).get(RecipeJsonParser.STEP_VIDEO));
+                    prepareMediaSource(videoUri);
+                    currentStepPosition = currentStepPosition + 1;
+                }
+
                 break;
         }
     }
