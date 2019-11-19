@@ -18,7 +18,9 @@ import android.support.v4.media.session.PlaybackStateCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.focals.recipes.R;
 import com.google.android.exoplayer2.DefaultLoadControl;
@@ -44,7 +46,7 @@ import com.google.android.exoplayer2.util.Util;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class StepFragment extends Fragment implements ExoPlayer.EventListener {
+public class StepFragment extends Fragment implements ExoPlayer.EventListener, View.OnClickListener {
 
     @BindView(R.id.tv_stepDesc)
     TextView stepDescriptionTextView;
@@ -54,6 +56,12 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
     SimpleExoPlayer simpleExoPlayer;
     String stepDesc;
     Uri videoUri;
+
+    @BindView(R.id.button_previousStep)
+    Button previousButton;
+
+    @BindView(R.id.button_nextStep)
+    Button nextButton;
 
     public StepFragment() {
         // Required empty public constructor
@@ -83,6 +91,11 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
         stepDescriptionTextView.setText(stepDesc);
 
         initializePlayer(videoUri);
+
+
+
+        previousButton.setOnClickListener(this);
+        nextButton.setOnClickListener(this);
 
         return view;
 
@@ -144,5 +157,29 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
         simpleExoPlayer.stop();
         simpleExoPlayer.release();
         simpleExoPlayer = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        int buttonId = v.getId();
+
+        switch (buttonId) {
+
+            case R.id.button_previousStep:
+                Toast.makeText(getActivity(), "Previous Button Clicked", Toast.LENGTH_SHORT).show();
+
+                break;
+
+            case R.id.button_nextStep:
+                break;
+
+
+        }
+
+
+
+
+
     }
 }
