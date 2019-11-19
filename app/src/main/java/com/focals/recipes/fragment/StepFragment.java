@@ -85,7 +85,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
         ButterKnife.bind(this, view);
         recipes = RecipeJsonParser.getRecipes();
 
-
+        // TODO: Use only if savedState is null
         currentRecipePosition = getActivity().getIntent().getIntExtra("recipePosition", -1);
         currentStepPosition = getActivity().getIntent().getIntExtra("stepPosition", -1);
         currentRecipe = recipes.get(currentRecipePosition);
@@ -120,33 +120,28 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
 
     private void initializePlayer(Uri mediaUri, long currentPosition) {
 
-        if (TextUtils.isEmpty(mediaUri.toString())) {
+        if (simpleExoPlayer == null) {
 
-            showNoVideoToast(); //TODO: use return here  instead  of else below
-        } else {
-            if (simpleExoPlayer == null) {
+            // Create an instance of the ExoPlayer.
+            simpleExoPlayer = ExoPlayerFactory.newSimpleInstance(getActivity(), new DefaultTrackSelector(), new DefaultLoadControl());
 
-                // Create an instance of the ExoPlayer.
-                simpleExoPlayer = ExoPlayerFactory.newSimpleInstance(getActivity(), new DefaultTrackSelector(), new DefaultLoadControl());
+            // Set the Player in the PlayerView
+            playerView.setPlayer(simpleExoPlayer);
 
-                // Set the Player in the PlayerView
-                playerView.setPlayer(simpleExoPlayer);
+            // Set the Player EventListener
+            simpleExoPlayer.addListener(this);
 
-                // Set the Player EventListener
-                simpleExoPlayer.addListener(this);
-
-                // Prepare the MediaSource.
-                prepareMediaSource(mediaUri);
+            // Prepare the MediaSource.
+            prepareMediaSource(mediaUri);
 
 
-                if (currentPosition != 0) {
-                    simpleExoPlayer.seekTo(currentPosition);
-                }
+            if (currentPosition != 0) {
+                simpleExoPlayer.seekTo(currentPosition);
+            }
 
 
-                if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                    setFullScreen();
-                }
+            if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                setFullScreen();
             }
         }
     }

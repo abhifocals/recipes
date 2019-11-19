@@ -105,9 +105,9 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
 
             Intent intent = new Intent(this, StepActivity.class);
 
-            intent.putExtra("stepDesc", stepDesc);
-            intent.putExtra("name", name);
-            intent.putExtra("videourl", videoUrl);
+//            intent.putExtra("stepDesc", stepDesc);
+//            intent.putExtra("name", name);
+//            intent.putExtra("videourl", videoUrl);
             intent.putExtra("stepPosition", position);
             intent.putExtra("recipePosition", recipePosition);
 
