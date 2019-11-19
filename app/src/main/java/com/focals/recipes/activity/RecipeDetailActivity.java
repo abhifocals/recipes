@@ -83,15 +83,15 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
     }
 
     @Override
-    public void onStepClick(int position) {
+    public void onStepClick(int stepPosition) {
 
-        String stepDesc = steps.get(position).get(RecipeJsonParser.STEP_DESC);
-        String videoUrl = steps.get(position).get(RecipeJsonParser.STEP_VIDEO);
+        String stepDesc = steps.get(stepPosition).get(RecipeJsonParser.STEP_DESC);
+        String videoUrl = steps.get(stepPosition).get(RecipeJsonParser.STEP_VIDEO);
 
 
         if (isTablet()) {
 
-            StepFragment stepFragment = new StepFragment(stepDesc);
+            StepFragment stepFragment = new StepFragment(recipePosition, stepPosition);
 
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_tabletRight, stepFragment).commit();
 
@@ -108,7 +108,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
 //            intent.putExtra("stepDesc", stepDesc);
 //            intent.putExtra("name", name);
 //            intent.putExtra("videourl", videoUrl);
-            intent.putExtra("stepPosition", position);
+            intent.putExtra("stepPosition", stepPosition);
             intent.putExtra("recipePosition", recipePosition);
 
             startActivity(intent);

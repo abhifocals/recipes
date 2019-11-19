@@ -66,13 +66,16 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
     private Recipe currentRecipe;
     private ArrayList<HashMap<String, String>> currentRecipeSteps;
     private long playerCurrentPosition;
+    boolean isTablet;
 
     public StepFragment() {
         // Required empty public constructor
     }
 
-    public StepFragment(String stepDesc) {
-        this.stepDesc = stepDesc;
+    public StepFragment(int recipePosition, int  stepPosition) {
+        this.currentRecipePosition = recipePosition;
+        this.currentStepPosition = stepPosition;
+        isTablet = true;
     }
 
     @Override
@@ -85,9 +88,12 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
         ButterKnife.bind(this, view);
         recipes = RecipeJsonParser.getRecipes();
 
-        // TODO: Use only if savedState is null
-        currentRecipePosition = getActivity().getIntent().getIntExtra("recipePosition", -1);
-        currentStepPosition = getActivity().getIntent().getIntExtra("stepPosition", -1);
+
+        if (!isTablet) {
+            currentRecipePosition = getActivity().getIntent().getIntExtra("recipePosition", -1);
+            currentStepPosition = getActivity().getIntent().getIntExtra("stepPosition", -1);
+        }
+
         currentRecipe = recipes.get(currentRecipePosition);
         currentRecipeSteps = currentRecipe.getSteps();
 
