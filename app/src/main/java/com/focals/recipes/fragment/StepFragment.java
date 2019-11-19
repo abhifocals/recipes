@@ -183,9 +183,12 @@ else {
     }
 
     private void releasePlayer() {
-        simpleExoPlayer.stop();
-        simpleExoPlayer.release();
-        simpleExoPlayer = null;
+
+        if (simpleExoPlayer != null) {
+            simpleExoPlayer.stop();
+            simpleExoPlayer.release();
+            simpleExoPlayer = null;
+        }
     }
 
     @Override
