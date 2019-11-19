@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,11 +100,23 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
         currentRecipe = recipes.get(currentRecipePosition);
         currentRecipeSteps = currentRecipe.getSteps();
 
+
+        setButtonStatus();
+
         return view;
 
     }
 
     private void initializePlayer(Uri mediaUri) {
+
+        if (TextUtils.isEmpty(mediaUri.toString())) {
+
+            playerView.text
+
+        }
+
+
+
         if (simpleExoPlayer == null) {
 
             // Create an instance of the ExoPlayer.
@@ -178,15 +191,18 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
                 if (currentStepPosition > 0) {
                     newDesc = currentRecipeSteps.get(currentStepPosition - 1).get(RecipeJsonParser.STEP_DESC);
                     stepDescriptionTextView.setText(newDesc);
-                    videoUri = Uri.parse(currentRecipeSteps.get(currentStepPosition-1).get(RecipeJsonParser.STEP_VIDEO));
+                    videoUri = Uri.parse(currentRecipeSteps.get(currentStepPosition - 1).get(RecipeJsonParser.STEP_VIDEO));
                     prepareMediaSource(videoUri);
                     currentStepPosition = currentStepPosition - 1;
                 }
+
+                setButtonStatus();
+
                 break;
 
             case R.id.button_nextStep:
 
-                if (currentStepPosition < currentRecipeSteps.size()-1) {
+                if (currentStepPosition < currentRecipeSteps.size() - 1) {
                     newDesc = currentRecipeSteps.get(currentStepPosition + 1).get(RecipeJsonParser.STEP_DESC);
                     stepDescriptionTextView.setText(newDesc);
                     videoUri = Uri.parse(currentRecipeSteps.get(currentStepPosition + 1).get(RecipeJsonParser.STEP_VIDEO));
@@ -194,11 +210,32 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
                     currentStepPosition = currentStepPosition + 1;
                 }
 
+                setButtonStatus();
+
                 break;
         }
     }
 
     public interface StepChangeHandler {
         void onStepChange(int position);
+    }
+
+    private void setButtonStatus() {
+
+        // Previous Step Button
+
+        if (currentStepPosition == 0) {
+            previousButton.setEnabled(false);
+        } else {
+            previousButton.setEnabled(true);
+        }
+
+        // Next Step Button
+
+        if (currentStepPosition == currentRecipeSteps.size() - 1) {
+            nextButton.setEnabled(false);
+        } else {
+            nextButton.setEnabled(true);
+        }
     }
 }
