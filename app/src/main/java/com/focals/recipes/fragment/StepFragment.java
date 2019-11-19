@@ -83,20 +83,11 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
         View view = inflater.inflate(R.layout.fragment_step, container, false);
 
         ButterKnife.bind(this, view);
-
-        if (stepDesc == null) {
-            stepDesc = getActivity().getIntent().getStringExtra("stepDesc");
-            videoUri = Uri.parse(getActivity().getIntent().getStringExtra("videourl"));
-        }
-
-        stepDescriptionTextView.setText(stepDesc);
-
-
-        previousButton.setOnClickListener(this);
-        nextButton.setOnClickListener(this);
         recipes = RecipeJsonParser.getRecipes();
-        currentStepPosition = getActivity().getIntent().getIntExtra("stepPosition", -1);
+
+
         currentRecipePosition = getActivity().getIntent().getIntExtra("recipePosition", -1);
+        currentStepPosition = getActivity().getIntent().getIntExtra("stepPosition", -1);
         currentRecipe = recipes.get(currentRecipePosition);
         currentRecipeSteps = currentRecipe.getSteps();
 
@@ -108,7 +99,20 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
             playerCurrentPosition = savedInstanceState.getLong("PlayerCurrentPosition");
         }
 
+        if (savedInstanceState != null && savedInstanceState.containsKey("StepPosition")) {
+            currentStepPosition = savedInstanceState.getInt("StepPosition");
+
+        }
+
+
+        stepDescriptionTextView.setText(currentRecipeSteps.get(currentStepPosition).get(RecipeJsonParser.STEP_DESC));
+        videoUri = Uri.parse(currentRecipeSteps.get(currentStepPosition).get(RecipeJsonParser.STEP_VIDEO));
+
         initializePlayer(videoUri, playerCurrentPosition);
+
+
+        previousButton.setOnClickListener(this);
+        nextButton.setOnClickListener(this);
 
         return view;
 
@@ -164,6 +168,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
         super.onSaveInstanceState(outState);
 
         outState.putLong("PlayerCurrentPosition", simpleExoPlayer.getCurrentPosition());
+        outState.putInt("StepPosition", currentStepPosition);
 
     }
 
