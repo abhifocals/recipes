@@ -33,6 +33,8 @@ import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -111,8 +113,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
 
         if (TextUtils.isEmpty(mediaUri.toString())) {
 
-            playerView.setDefaultArtwork(getResources().getDrawable(R.drawable.video_not_available));
-
+            showNoVideoToast();
         }
 
 else {
@@ -137,10 +138,16 @@ else {
     }
 
     private void prepareMediaSource(Uri mediaUri) {
-        mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
-                getActivity(), "MyRecipes"), new DefaultExtractorsFactory(), null, null);
-        simpleExoPlayer.prepare(mediaSource);
-        simpleExoPlayer.setPlayWhenReady(true);
+
+        if (TextUtils.isEmpty(mediaUri.toString())) {
+            showNoVideoToast();
+        }
+        else {
+            mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
+                    getActivity(), "MyRecipes"), new DefaultExtractorsFactory(), null, null);
+            simpleExoPlayer.prepare(mediaSource);
+            simpleExoPlayer.setPlayWhenReady(true);
+        }
     }
 
     @Override
@@ -240,5 +247,9 @@ else {
         } else {
             nextButton.setEnabled(true);
         }
+    }
+
+    private void showNoVideoToast() {
+        Toast.makeText(getActivity(), "No video is available for this step", Toast.LENGTH_LONG).show();
     }
 }
