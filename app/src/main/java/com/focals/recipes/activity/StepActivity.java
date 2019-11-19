@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.focals.recipes.R;
+import com.focals.recipes.fragment.StepFragment;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 
 public class StepActivity extends AppCompatActivity {
@@ -16,6 +17,7 @@ public class StepActivity extends AppCompatActivity {
     @BindView(R.id.tv_stepDesc)
     TextView stepDescriptionTextView;
     SimpleExoPlayer player;
+    int position;
 
 
     @Override
@@ -29,5 +31,8 @@ public class StepActivity extends AppCompatActivity {
         // Set ActionBar Title
         getSupportActionBar().setTitle(getIntent().getStringExtra("name"));
 
+        position = getIntent().getIntExtra("position", -1);
+
     }
+
 }

@@ -26,6 +26,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
     private String name;
     private ArrayList<HashMap<String, String>> ingredients;
     private ArrayList<HashMap<String, String>> steps;
+    private int recipePosition;
 
     @BindView(R.id.rv_steps)
     RecyclerView stepsRecyclerView;
@@ -58,6 +59,8 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
 
         // Set ActionBar Title
         getSupportActionBar().setTitle(name);
+
+        recipePosition = getIntent().getIntExtra("recipePosition", -1);
     }
 
     public void showIngredients(View v) {
@@ -105,6 +108,8 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
             intent.putExtra("stepDesc", stepDesc);
             intent.putExtra("name", name);
             intent.putExtra("videourl", videoUrl);
+            intent.putExtra("stepPosition", position);
+            intent.putExtra("recipePosition", recipePosition);
 
             startActivity(intent);
         }
