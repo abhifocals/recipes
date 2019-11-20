@@ -19,31 +19,31 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-
     @BindView(R.id.gridView)
     GridView gridView;
 
-    ArrayList<Recipe> recipeList;
-
+    private ArrayList<Recipe> recipeList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Binding views with Butterknife
         ButterKnife.bind(this);
 
+        // Getting recipes from parser
         recipeList = RecipeJsonParser.parseRecipes(this);
 
+        // Setting the adapter in view
         MainAdapter mainAdapter = new MainAdapter(this, R.layout.activity_main_singlerecipe, recipeList);
-
         gridView.setAdapter(mainAdapter);
-
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -54,15 +54,16 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(MainActivity.this, RecipeDetailActivity.class);
 
-                // Name
+                // Name used by both IngredientsDetail and Step Activities
                 intent.putExtra("name", recipe.getName());
 
-                // Ingredients List
+                // Ingredients List used by IngredientsActivity
                 intent.putExtra("ingredients", recipe.getIngredients());
 
-                // Steps List
+                // Steps List used by StepActivity
                 intent.putExtra("steps", recipe.getSteps());
 
+                // Used by StepFragment
                 intent.putExtra("recipePosition", position);
 
                 startActivity(intent);
