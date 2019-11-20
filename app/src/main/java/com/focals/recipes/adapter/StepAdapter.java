@@ -57,9 +57,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
         void onStepClick(int position);
     }
 
-
     class StepHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
         @BindView(R.id.tv_stepShortDescription)
         TextView stepTextView;
 
@@ -75,6 +73,4 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
             clickHandler.onStepClick(getAdapterPosition());
         }
     }
-
-
 }
