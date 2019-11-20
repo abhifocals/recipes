@@ -13,7 +13,6 @@ import com.focals.recipes.utils.RecipeJsonParser;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import butterknife.BindView;
@@ -38,8 +37,6 @@ public class IngredientsAdapter extends ArrayAdapter<HashMap<String, String>> {
             ButterKnife.bind(this, view);
         }
     }
-
-
 
     @NonNull
     @Override
