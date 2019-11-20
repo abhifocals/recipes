@@ -249,7 +249,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
             showNoVideoToast();
         }
         mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
-                getActivity(), "MyRecipes"), new DefaultExtractorsFactory(), null, null);
+                getActivity(), getString(R.string.app_name)), new DefaultExtractorsFactory(), null, null);
         simpleExoPlayer.prepare(mediaSource);
         simpleExoPlayer.setPlayWhenReady(true); //TODO: needed?
     }
@@ -290,7 +290,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
      * Shows a toast if video url is empty.
      */
     private void showNoVideoToast() {
-        Toast toast = Toast.makeText(getActivity(), "No video is available for this step.", Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(getActivity(), getString(R.string.noVideoAvailable), Toast.LENGTH_LONG);
 
         LinearLayout linearLayout = (LinearLayout) toast.getView();
         TextView textView = (TextView) linearLayout.getChildAt(0);

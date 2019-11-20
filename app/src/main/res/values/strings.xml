@@ -9,4 +9,9 @@
     <string name="recipe_position">recipePosition</string>
     <string name="step_position">stepPosition</string>
     <string name="player_position">playerPosition</string>
+    <string name="nutellaPie">Nutelle Pie</string>
+    <string name="brownies">Brownies</string>
+    <string name="cheesecake">Cheesecake</string>
+    <string name="yellowCake">Yellow Cake</string>
+    <string name="noVideoAvailable">No video is available for this step.</string>
 </resources>

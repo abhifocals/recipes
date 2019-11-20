@@ -1,22 +1,22 @@
 package com.focals.recipes.adapter;
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+        import android.content.Context;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.ArrayAdapter;
+        import android.widget.ImageView;
+        import android.widget.TextView;
 
-import com.focals.recipes.R;
-import com.focals.recipes.utils.Recipe;
+        import com.focals.recipes.R;
+        import com.focals.recipes.utils.Recipe;
 
-import java.util.ArrayList;
+        import java.util.ArrayList;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+        import androidx.annotation.NonNull;
+        import androidx.annotation.Nullable;
+        import butterknife.BindView;
+        import butterknife.ButterKnife;
 
 public class MainAdapter extends ArrayAdapter<Recipe> {
 
@@ -56,22 +56,14 @@ public class MainAdapter extends ArrayAdapter<Recipe> {
         // Setting View Data
         holder.recipeTitleTextView.setText(recipe.getName());
 
-        switch (recipe.getName()) {
-            case "Nutelle Pie":
-                holder.recipeImageView.setImageResource(R.drawable.nutella_pie);
-                break;
-
-            case "Brownies":
-                holder.recipeImageView.setImageResource(R.drawable.brownies);
-                break;
-
-            case "Cheesecake":
-                holder.recipeImageView.setImageResource(R.drawable.cheesecake);
-                break;
-
-            case "Yellow Cake":
-                holder.recipeImageView.setImageResource(R.drawable.yellow_cake);
-                break;
+        if (recipe.getName().equals(context.getResources().getString(R.string.nutellaPie))) {
+            holder.recipeImageView.setImageResource(R.drawable.nutella_pie);
+        } else if (recipe.getName().equals(context.getResources().getString(R.string.brownies))) {
+            holder.recipeImageView.setImageResource(R.drawable.brownies);
+        } else if (recipe.getName().equals(context.getResources().getString(R.string.cheesecake))) {
+            holder.recipeImageView.setImageResource(R.drawable.cheesecake);
+        } else if (recipe.getName().equals(context.getResources().getString(R.string.yellowCake))) {
+            holder.recipeImageView.setImageResource(R.drawable.yellow_cake);
         }
 
         return convertView;
