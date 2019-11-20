@@ -4,13 +4,6 @@ package com.focals.recipes.fragment;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,9 +33,12 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class StepFragment extends Fragment implements ExoPlayer.EventListener, View.OnClickListener {
 
     @BindView(R.id.tv_stepDesc)
@@ -50,9 +46,6 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
 
     @BindView(R.id.playerView)
     PlayerView playerView;
-    SimpleExoPlayer simpleExoPlayer;
-    String stepDesc;
-    Uri videoUri;
 
     @BindView(R.id.button_previousStep)
     Button previousButton;
@@ -63,20 +56,31 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
     @BindView(R.id.exo_play)
     View playButton;
 
-    ArrayList<Recipe> recipes;
-    int currentStepPosition;
-    int currentRecipePosition;
+
+    private SimpleExoPlayer simpleExoPlayer;
+    private Uri videoUri;
     MediaSource mediaSource;
+    private long playerCurrentPosition;
+
+    private ArrayList<Recipe> recipes;
+    private int currentStepPosition;
+    private int currentRecipePosition;
     private Recipe currentRecipe;
     private ArrayList<HashMap<String, String>> currentRecipeSteps;
-    private long playerCurrentPosition;
-    boolean isTablet;
+
+    private boolean isTablet;
 
     public StepFragment() {
         // Required empty public constructor
     }
 
-    public StepFragment(int recipePosition, int  stepPosition) {
+    /**
+     * Used for creating StepFragment for Tablet (since StepActivity isn't started).
+     *
+     * @param recipePosition
+     * @param stepPosition
+     */
+    public StepFragment(int recipePosition, int stepPosition) {
         this.currentRecipePosition = recipePosition;
         this.currentStepPosition = stepPosition;
         isTablet = true;
@@ -105,13 +109,9 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
         setButtonStatus();
 
 
-        if (savedInstanceState != null && savedInstanceState.containsKey("PlayerCurrentPosition")) {
+        if (savedInstanceState != null) {
             playerCurrentPosition = savedInstanceState.getLong("PlayerCurrentPosition");
-        }
-
-        if (savedInstanceState != null && savedInstanceState.containsKey("StepPosition")) {
             currentStepPosition = savedInstanceState.getInt("StepPosition");
-
         }
 
 
@@ -120,14 +120,19 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
 
         initializePlayer(videoUri, playerCurrentPosition);
 
-
         previousButton.setOnClickListener(this);
         nextButton.setOnClickListener(this);
         playButton.setOnClickListener(this);
 
         return view;
-
     }
+
+    /**
+     * Initializes the ExoPlayer.
+     *
+     * @param mediaUri
+     * @param currentPosition
+     */
 
     private void initializePlayer(Uri mediaUri, long currentPosition) {
 
@@ -145,11 +150,9 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
             // Prepare the MediaSource.
             prepareMediaSource(mediaUri);
 
-
             if (currentPosition != 0) {
                 simpleExoPlayer.seekTo(currentPosition);
             }
-
 
             if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && !isTablet) {
                 setFullScreen();
@@ -157,67 +160,11 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
         }
     }
 
-    private void prepareMediaSource(Uri mediaUri) {
-
-        if (TextUtils.isEmpty(mediaUri.toString())) {
-            showNoVideoToast();
-        }
-        mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
-                getActivity(), "MyRecipes"), new DefaultExtractorsFactory(), null, null);
-        simpleExoPlayer.prepare(mediaSource);
-        simpleExoPlayer.setPlayWhenReady(true); //TODO: needed?
-
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        outState.putLong("PlayerCurrentPosition", simpleExoPlayer.getCurrentPosition());
-        outState.putInt("StepPosition", currentStepPosition);
-
-    }
-
-    @Override
-    public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
-
-        if ((playbackState == ExoPlayer.STATE_READY) && playWhenReady) {
-
-        } else if ((playbackState == ExoPlayer.STATE_READY)) {
-
-        }
-
-    }
-
-    @Override
-    public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
-
-    }
-
-    @Override
-    public void onLoadingChanged(boolean isLoading) {
-
-    }
-
-    @Override
-    public void onPlayerError(ExoPlaybackException error) {
-
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        releasePlayer();
-    }
-
-    private void releasePlayer() {
-
-        if (simpleExoPlayer != null) {
-            simpleExoPlayer.stop();
-            simpleExoPlayer.release();
-            simpleExoPlayer = null;
-        }
-    }
+    /**
+     * Handles clicks of Previous button, Next button, and Play button in case of no video url.
+     *
+     * @param v
+     */
 
     @Override
     public void onClick(View v) {
@@ -257,42 +204,68 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
 
 
             case R.id.exo_play:
-                if  (currentRecipeSteps.get(currentStepPosition).get(RecipeJsonParser.STEP_VIDEO).isEmpty()) {
+                if (currentRecipeSteps.get(currentStepPosition).get(RecipeJsonParser.STEP_VIDEO).isEmpty()) {
                     showNoVideoToast();
                 }
         }
     }
 
-    private void setButtonStatus() {
+    /**
+     * Saves Current Step Position and Player Position for handling during rotation.
+     *
+     * @param outState
+     */
 
-        // Previous Step Button
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putLong("PlayerCurrentPosition", simpleExoPlayer.getCurrentPosition());
+        outState.putInt("StepPosition", currentStepPosition);
+    }
 
-        if (currentStepPosition == 0) {
-            previousButton.setEnabled(false);
-        } else {
-            previousButton.setEnabled(true);
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        releasePlayer();
+    }
+
+
+    ////////////  HELPERS ////////////
+
+    /**
+     * Helper used during Initializing the Player.
+     *
+     * @param mediaUri
+     */
+
+    private void prepareMediaSource(Uri mediaUri) {
+        if (TextUtils.isEmpty(mediaUri.toString())) {
+            showNoVideoToast();
         }
+        mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
+                getActivity(), "MyRecipes"), new DefaultExtractorsFactory(), null, null);
+        simpleExoPlayer.prepare(mediaSource);
+        simpleExoPlayer.setPlayWhenReady(true); //TODO: needed?
+    }
 
-        // Next Step Button
+    /**
+     * Releasing Media Player. Used during onDestroy.
+     */
 
-        if (currentStepPosition == currentRecipeSteps.size() - 1) {
-            nextButton.setEnabled(false);
-        } else {
-            nextButton.setEnabled(true);
+    private void releasePlayer() {
+
+        if (simpleExoPlayer != null) {
+            simpleExoPlayer.stop();
+            simpleExoPlayer.release();
+            simpleExoPlayer = null;
         }
     }
 
-    private void showNoVideoToast() {
-        Toast toast = Toast.makeText(getActivity(), "No video is available for this step.", Toast.LENGTH_LONG);
-
-        LinearLayout linearLayout = (LinearLayout) toast.getView();
-        TextView textView = (TextView) linearLayout.getChildAt(0);
-        textView.setTextSize(25);
-        toast.show();
-    }
+    /**
+     * Setting to full-screen for Landscape Mode in Phone only.
+     */
 
     private void setFullScreen() {
-
         ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) playerView.getLayoutParams();
         params.width = params.MATCH_PARENT;
         params.height = params.MATCH_PARENT;
@@ -306,4 +279,57 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
     }
+
+    /**
+     * Shows a toast if video url is empty.
+     */
+    private void showNoVideoToast() {
+        Toast toast = Toast.makeText(getActivity(), "No video is available for this step.", Toast.LENGTH_LONG);
+
+        LinearLayout linearLayout = (LinearLayout) toast.getView();
+        TextView textView = (TextView) linearLayout.getChildAt(0);
+        textView.setTextSize(25);
+        toast.show();
+    }
+
+    /**
+     * Set Previous and Next Buttons to disabled depending on which step the user is on.
+     */
+
+    private void setButtonStatus() {
+        // Previous Step Button
+        if (currentStepPosition == 0) {
+            previousButton.setEnabled(false);
+        } else {
+            previousButton.setEnabled(true);
+        }
+
+        // Next Step Button
+        if (currentStepPosition == currentRecipeSteps.size() - 1) {
+            nextButton.setEnabled(false);
+        } else {
+            nextButton.setEnabled(true);
+        }
+    }
+
+
+    ////////////  ExoPlayer.EventListener Interface Methods ////////////
+
+    @Override
+    public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+    }
+
+    @Override
+    public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
+
+    }
+
+    @Override
+    public void onLoadingChanged(boolean isLoading) {
+    }
+
+    @Override
+    public void onPlayerError(ExoPlaybackException error) {
+    }
+
 }
