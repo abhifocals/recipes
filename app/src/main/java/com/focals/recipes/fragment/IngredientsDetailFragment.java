@@ -47,7 +47,7 @@ public class IngredientsDetailFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_ingredients_detail, container, false);
 
-        // Used for Phone (since Tablet uses explicit creation of the Fragment with ingredient list)
+        // Used for Phone (since Tablet explicitly creates Fragment with ingredient list)
         if (ingredients == null) {
             ingredients = (ArrayList<HashMap<String, String>>) getActivity().getIntent().getSerializableExtra("ingredients");
         }
