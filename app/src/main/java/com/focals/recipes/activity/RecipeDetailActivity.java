@@ -1,25 +1,22 @@
 package com.focals.recipes.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
 
 import com.focals.recipes.R;
 import com.focals.recipes.adapter.StepAdapter;
 import com.focals.recipes.fragment.IngredientsDetailFragment;
-import com.focals.recipes.fragment.RecipeDetailFragment;
 import com.focals.recipes.fragment.StepFragment;
-import com.focals.recipes.utils.RecipeJsonParser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class RecipeDetailActivity extends AppCompatActivity implements StepAdapter.StepClickHandler {
 
@@ -34,12 +31,10 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_detail_recipe);
 
+        // Binding view with Butterknife
         ButterKnife.bind(this);
-
-
     }
 
     @Override
@@ -53,24 +48,30 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
         // Setup StepAdapter
         StepAdapter stepAdapter = new StepAdapter(steps, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-
         stepsRecyclerView.setAdapter(stepAdapter);
         stepsRecyclerView.setLayoutManager(linearLayoutManager);
 
         // Set ActionBar Title
         getSupportActionBar().setTitle(name);
 
+        // Getting recipe position from MainActivity
         recipePosition = getIntent().getIntExtra("recipePosition", -1);
     }
 
+    /**
+     * Used by Ingredients button via layout.
+     *
+     * @param v
+     */
     public void showIngredients(View v) {
 
+        // If Tablet, create Ingredient Fragment explicity.
         if (isTablet()) {
-
             IngredientsDetailFragment ingredientsDetailFragment = new IngredientsDetailFragment(ingredients);
-
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_tabletRight, ingredientsDetailFragment).commit();
-        } else {
+        }
+        // Else start IngredientDetailActivity
+        else {
             Intent intent = new Intent(this, IngredientsDetailActivity.class);
             intent.putExtra("ingredients", ingredients);
             intent.putExtra("name", name);
@@ -82,12 +83,13 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
     @Override
     public void onStepClick(int stepPosition) {
 
+        // If Tablet, create Step Fragment explicity.
         if (isTablet()) {
             StepFragment stepFragment = new StepFragment(recipePosition, stepPosition);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_tabletRight, stepFragment).commit();
-        } else {
-            // Get current Step info
-
+        }
+        // Else start StepActivity
+        else {
             Intent intent = new Intent(this, StepActivity.class);
             intent.putExtra("stepPosition", stepPosition);
             intent.putExtra("recipePosition", recipePosition);
@@ -95,6 +97,8 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
             startActivity(intent);
         }
     }
+
+    ////// Helper /////
 
     private boolean isTablet() {
 
