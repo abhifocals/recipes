@@ -2,11 +2,6 @@ package com.focals.recipes.fragment;
 
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +12,10 @@ import com.focals.recipes.adapter.IngredientsAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import androidx.fragment.app.Fragment;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,6 +31,11 @@ public class IngredientsDetailFragment extends Fragment {
         // Required empty public constructor
     }
 
+    /**
+     * Used  by Tablet for explicit Fragment creation, since IngredientActivity is not started.
+     *
+     * @param ingredients
+     */
     public IngredientsDetailFragment(ArrayList<HashMap<String, String>> ingredients) {
         this.ingredients = ingredients;
     }
@@ -40,16 +44,15 @@ public class IngredientsDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_ingredients_detail, container, false);
 
+        // Used for Phone (since Tablet uses explicit creation of the Fragment with ingredient list)
         if (ingredients == null) {
             ingredients = (ArrayList<HashMap<String, String>>) getActivity().getIntent().getSerializableExtra("ingredients");
         }
 
-
-
-
-        View view = inflater.inflate(R.layout.fragment_ingredients_detail, container, false);
-
+        // Binding views with Butterknife
         ButterKnife.bind(this, view);
 
         // Setup IngredientAdapter
@@ -57,9 +60,6 @@ public class IngredientsDetailFragment extends Fragment {
         ingredientsListView.setDivider(null);
         ingredientsListView.setAdapter(ingredientsAdapter);
 
-
-        // Inflate the layout for this fragment
         return view;
     }
-
 }

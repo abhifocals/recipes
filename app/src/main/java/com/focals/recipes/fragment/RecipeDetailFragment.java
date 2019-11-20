@@ -16,11 +16,9 @@ import com.focals.recipes.R;
  */
 public class RecipeDetailFragment extends Fragment {
 
-
     public RecipeDetailFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,5 +26,4 @@ public class RecipeDetailFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_recipe_detail, container, false);
     }
-
 }
