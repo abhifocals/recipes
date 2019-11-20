@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.focals.recipes.R;
 import com.focals.recipes.utils.Recipe;
+import com.focals.recipes.utils.RecipeConstants;
 import com.focals.recipes.utils.RecipeJsonParser;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
@@ -101,8 +102,8 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
 
         // In case of Phone, getting current recipe and step position from StepActivity
         if (!isTablet) {
-            currentRecipePosition = getActivity().getIntent().getIntExtra("recipePosition", -1);
-            currentStepPosition = getActivity().getIntent().getIntExtra("stepPosition", -1);
+            currentRecipePosition = getActivity().getIntent().getIntExtra(RecipeConstants.RECIPE_POSITION, -1);
+            currentStepPosition = getActivity().getIntent().getIntExtra(RecipeConstants.STEP_POSIITON, -1);
         }
 
         // Using the current recipe and step position values
@@ -113,14 +114,14 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
         stepDescriptionTextView.setText(currentRecipeSteps.get(currentStepPosition).get(RecipeJsonParser.STEP_DESC));
         videoUri = Uri.parse(currentRecipeSteps.get(currentStepPosition).get(RecipeJsonParser.STEP_VIDEO));
 
-        // Initializing the player
-        initializePlayer(videoUri, playerCurrentPosition);
-
         // Retreiving the current step and player position values saved during rotation
         if (savedInstanceState != null) {
-            playerCurrentPosition = savedInstanceState.getLong("PlayerCurrentPosition");
-            currentStepPosition = savedInstanceState.getInt("StepPosition");
+            playerCurrentPosition = savedInstanceState.getLong(RecipeConstants.PLAYER_POSIITON);
+            currentStepPosition = savedInstanceState.getInt(RecipeConstants.STEP_POSIITON);
         }
+
+        // Initializing the player
+        initializePlayer(videoUri, playerCurrentPosition);
 
         // Setting onClick listeners
         previousButton.setOnClickListener(this);
@@ -225,8 +226,8 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putLong("PlayerCurrentPosition", simpleExoPlayer.getCurrentPosition());
-        outState.putInt("StepPosition", currentStepPosition);
+        outState.putLong(RecipeConstants.PLAYER_POSIITON, simpleExoPlayer.getCurrentPosition());
+        outState.putInt(RecipeConstants.STEP_POSIITON, currentStepPosition);
     }
 
     @Override

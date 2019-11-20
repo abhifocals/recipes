@@ -13,6 +13,7 @@ import android.widget.GridView;
 import com.focals.recipes.adapter.MainAdapter;
 import com.focals.recipes.R;
 import com.focals.recipes.utils.Recipe;
+import com.focals.recipes.utils.RecipeConstants;
 import com.focals.recipes.utils.RecipeJsonParser;
 
 import java.util.ArrayList;
@@ -55,16 +56,16 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, RecipeDetailActivity.class);
 
                 // Name used by both IngredientsDetail and Step Activities
-                intent.putExtra("name", recipe.getName());
+                intent.putExtra(RecipeConstants.RECIPE_NAME, recipe.getName());
 
                 // Ingredients List used by IngredientsActivity
-                intent.putExtra("ingredients", recipe.getIngredients());
+                intent.putExtra(RecipeConstants.INGREDIENTS_LIST, recipe.getIngredients());
 
                 // Steps List used by StepActivity
-                intent.putExtra("steps", recipe.getSteps());
+                intent.putExtra(RecipeConstants.STEPS_LIST, recipe.getSteps());
 
                 // Used by StepFragment
-                intent.putExtra("recipePosition", position);
+                intent.putExtra(RecipeConstants.RECIPE_POSITION, position);
 
                 startActivity(intent);
             }

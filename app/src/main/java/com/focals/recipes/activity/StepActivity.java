@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.focals.recipes.R;
+import com.focals.recipes.utils.RecipeConstants;
 import com.focals.recipes.utils.RecipeJsonParser;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,7 +35,7 @@ public class StepActivity extends AppCompatActivity {
 
         // Getting the recipe position from MainActivity
         Intent intent = getIntent();
-        recipePosition = getIntent().getIntExtra("recipePosition", -1);
+        recipePosition = getIntent().getIntExtra(RecipeConstants.RECIPE_POSITION, -1);
 
         // Set ActionBar Title
         String recipeName = RecipeJsonParser.getRecipes().get(recipePosition).getName();

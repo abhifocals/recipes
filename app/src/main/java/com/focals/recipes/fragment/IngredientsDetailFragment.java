@@ -9,6 +9,7 @@ import android.widget.ListView;
 
 import com.focals.recipes.R;
 import com.focals.recipes.adapter.IngredientsAdapter;
+import com.focals.recipes.utils.RecipeConstants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,7 +50,7 @@ public class IngredientsDetailFragment extends Fragment {
 
         // Used for Phone (since Tablet explicitly creates Fragment with ingredient list)
         if (ingredients == null) {
-            ingredients = (ArrayList<HashMap<String, String>>) getActivity().getIntent().getSerializableExtra("ingredients");
+            ingredients = (ArrayList<HashMap<String, String>>) getActivity().getIntent().getSerializableExtra(RecipeConstants.INGREDIENTS_LIST);
         }
 
         // Binding views with Butterknife
