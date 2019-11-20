@@ -93,36 +93,42 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_step, container, false);
 
+        // Binding view with Butterknife
         ButterKnife.bind(this, view);
+
+        // Getting recipes from JsonParser
         recipes = RecipeJsonParser.getRecipes();
 
-
+        // In case of Phone, getting current recipe and step position from StepActivity
         if (!isTablet) {
             currentRecipePosition = getActivity().getIntent().getIntExtra("recipePosition", -1);
             currentStepPosition = getActivity().getIntent().getIntExtra("stepPosition", -1);
         }
 
+        // Using the current recipe and step position values
         currentRecipe = recipes.get(currentRecipePosition);
         currentRecipeSteps = currentRecipe.getSteps();
 
+        // Setting the ingredient text and video url
+        stepDescriptionTextView.setText(currentRecipeSteps.get(currentStepPosition).get(RecipeJsonParser.STEP_DESC));
+        videoUri = Uri.parse(currentRecipeSteps.get(currentStepPosition).get(RecipeJsonParser.STEP_VIDEO));
 
-        setButtonStatus();
+        // Initializing the player
+        initializePlayer(videoUri, playerCurrentPosition);
 
-
+        // Retreiving the current step and player position values saved during rotation
         if (savedInstanceState != null) {
             playerCurrentPosition = savedInstanceState.getLong("PlayerCurrentPosition");
             currentStepPosition = savedInstanceState.getInt("StepPosition");
         }
 
-
-        stepDescriptionTextView.setText(currentRecipeSteps.get(currentStepPosition).get(RecipeJsonParser.STEP_DESC));
-        videoUri = Uri.parse(currentRecipeSteps.get(currentStepPosition).get(RecipeJsonParser.STEP_VIDEO));
-
-        initializePlayer(videoUri, playerCurrentPosition);
-
+        // Setting onClick listeners
         previousButton.setOnClickListener(this);
         nextButton.setOnClickListener(this);
         playButton.setOnClickListener(this);
+
+        // Enabling the Previous and Next Buttons depending on which step user is on
+        setButtonStatus();
 
         return view;
     }
@@ -161,7 +167,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
     }
 
     /**
-     * Handles clicks of Previous button, Next button, and Play button in case of no video url.
+     * Handles clicks of Previous button, Next button, and Play button (in case of no video url).
      *
      * @param v
      */
