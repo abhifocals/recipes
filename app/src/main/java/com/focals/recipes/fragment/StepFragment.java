@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.focals.recipes.R;
 import com.focals.recipes.utils.Recipe;
-import com.focals.recipes.utils.RecipeConstants;
 import com.focals.recipes.utils.RecipeJsonParser;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
@@ -102,8 +101,8 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
 
         // In case of Phone, getting current recipe and step position from StepActivity
         if (!isTablet) {
-            currentRecipePosition = getActivity().getIntent().getIntExtra(RecipeConstants.RECIPE_POSITION, -1);
-            currentStepPosition = getActivity().getIntent().getIntExtra(RecipeConstants.STEP_POSIITON, -1);
+            currentRecipePosition = getActivity().getIntent().getIntExtra(getString(R.string.recipe_position), -1);
+            currentStepPosition = getActivity().getIntent().getIntExtra(getString(R.string.step_position), -1);
         }
 
         // Using the current recipe and step position values
@@ -116,8 +115,8 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
 
         // Retreiving the current step and player position values saved during rotation
         if (savedInstanceState != null) {
-            playerCurrentPosition = savedInstanceState.getLong(RecipeConstants.PLAYER_POSIITON);
-            currentStepPosition = savedInstanceState.getInt(RecipeConstants.STEP_POSIITON);
+            playerCurrentPosition = savedInstanceState.getLong(getString(R.string.player_position));
+            currentStepPosition = savedInstanceState.getInt(getString(R.string.step_position));
         }
 
         // Initializing the player
@@ -226,8 +225,8 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putLong(RecipeConstants.PLAYER_POSIITON, simpleExoPlayer.getCurrentPosition());
-        outState.putInt(RecipeConstants.STEP_POSIITON, currentStepPosition);
+        outState.putLong(getString(R.string.player_position), simpleExoPlayer.getCurrentPosition());
+        outState.putInt(getString(R.string.step_position), currentStepPosition);
     }
 
     @Override

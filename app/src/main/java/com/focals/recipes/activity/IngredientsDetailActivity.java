@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import com.focals.recipes.R;
-import com.focals.recipes.utils.RecipeConstants;
 
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
@@ -30,6 +29,6 @@ public class IngredientsDetailActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         // Setting ActionBar title
-        getSupportActionBar().setTitle(getIntent().getStringExtra(RecipeConstants.RECIPE_NAME));
+        getSupportActionBar().setTitle(getIntent().getStringExtra(getString(R.string.recipe_name)));
     }
 }

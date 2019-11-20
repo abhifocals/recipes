@@ -8,7 +8,6 @@ import com.focals.recipes.R;
 import com.focals.recipes.adapter.StepAdapter;
 import com.focals.recipes.fragment.IngredientsDetailFragment;
 import com.focals.recipes.fragment.StepFragment;
-import com.focals.recipes.utils.RecipeConstants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,9 +41,9 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
     protected void onStart() {
         super.onStart();
 
-        name = getIntent().getStringExtra(RecipeConstants.RECIPE_NAME);
-        ingredients = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra(RecipeConstants.INGREDIENTS_LIST);
-        steps = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra(RecipeConstants.STEPS_LIST);
+        name = getIntent().getStringExtra(getString(R.string.recipe_name));
+        ingredients = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra(getString(R.string.ingredients_list));
+        steps = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra(getString(R.string.steps_list));
 
         // Setup StepAdapter
         StepAdapter stepAdapter = new StepAdapter(steps, this);
@@ -56,7 +55,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
         getSupportActionBar().setTitle(name);
 
         // Getting recipe position from MainActivity
-        recipePosition = getIntent().getIntExtra(RecipeConstants.RECIPE_POSITION, -1);
+        recipePosition = getIntent().getIntExtra(getString(R.string.recipe_position), -1);
     }
 
     /**
@@ -74,8 +73,8 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
         // Else start IngredientDetailActivity
         else {
             Intent intent = new Intent(this, IngredientsDetailActivity.class);
-            intent.putExtra(RecipeConstants.INGREDIENTS_LIST, ingredients);
-            intent.putExtra(RecipeConstants.RECIPE_NAME, name);
+            intent.putExtra(getString(R.string.ingredients_list), ingredients);
+            intent.putExtra(getString(R.string.recipe_name), name);
 
             startActivity(intent);
         }
@@ -92,8 +91,8 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
         // Else start StepActivity
         else {
             Intent intent = new Intent(this, StepActivity.class);
-            intent.putExtra(RecipeConstants.STEP_POSIITON, stepPosition);
-            intent.putExtra(RecipeConstants.RECIPE_POSITION, recipePosition);
+            intent.putExtra(getString(R.string.step_position), stepPosition);
+            intent.putExtra(getString(R.string.recipe_position), recipePosition);
 
             startActivity(intent);
         }
