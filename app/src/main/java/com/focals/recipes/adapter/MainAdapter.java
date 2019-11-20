@@ -33,7 +33,6 @@ public class MainAdapter extends ArrayAdapter<Recipe> {
     }
 
     static class ViewHolder {
-
         @BindView(R.id.recipeImage)
         ImageView recipeImageView;
 
@@ -57,10 +56,7 @@ public class MainAdapter extends ArrayAdapter<Recipe> {
         // Setting View Data
         holder.recipeTitleTextView.setText(recipe.getName());
 
-
-        // Extract into method
         switch (recipe.getName()) {
-
             case "Nutelle Pie":
                 holder.recipeImageView.setImageResource(R.drawable.nutella_pie);
                 break;
@@ -76,8 +72,6 @@ public class MainAdapter extends ArrayAdapter<Recipe> {
             case "Yellow Cake":
                 holder.recipeImageView.setImageResource(R.drawable.yellow_cake);
                 break;
-
-
         }
 
         return convertView;
