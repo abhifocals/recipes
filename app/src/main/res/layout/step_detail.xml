@@ -30,7 +30,8 @@
         android:layout_marginBottom="@dimen/margin_bottom"
         android:text="@string/previous_step"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"></Button>
+        app:layout_constraintStart_toStartOf="parent"
+        android:backgroundTint="@color/colorMustard"></Button>
 
     <Button
         android:id="@+id/button_nextStep"
@@ -40,6 +41,7 @@
         android:layout_marginBottom="@dimen/margin_bottom"
         android:text="@string/next_step"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"></Button>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@color/colorMustard"></Button>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
