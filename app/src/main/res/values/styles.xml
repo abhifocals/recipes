@@ -20,7 +20,7 @@
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorGrey</item>
-        <item name="android:backgroundTint">@color/colorRed</item>
+        <item name="android:backgroundTint">@color/colorCoffee</item>
     </style>
 
     <style name="RecipeTextView">

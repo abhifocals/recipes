@@ -31,7 +31,8 @@
         android:text="@string/previous_step"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:backgroundTint="@color/colorRed"></Button>
+        android:backgroundTint="@color/colorCoffee"
+        android:textColor="@color/colorGrey"></Button>
 
     <Button
         android:id="@+id/button_nextStep"
@@ -42,6 +43,7 @@
         android:text="@string/next_step"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:backgroundTint="@color/colorRed"></Button>
+        android:backgroundTint="@color/colorCoffee"
+        android:textColor="@color/colorGrey"></Button>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
