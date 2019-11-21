@@ -8,13 +8,10 @@
 
     <Button
         android:id="@+id/tv_stepShortDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Step Description"
+        style="@style/RecipeButton"
+        android:drawableEnd="@drawable/ic_keyboard_arrow_right_black_24dp"
+        android:gravity="left"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:gravity="left"
-        android:drawableEnd="@drawable/ic_keyboard_arrow_right_black_24dp"
-        android:textStyle="bold"/>
+        tools:text="Step Description" />
 </androidx.constraintlayout.widget.ConstraintLayout>

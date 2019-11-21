@@ -13,17 +13,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></com.google.android.exoplayer2.ui.PlayerView>
 
-
     <TextView
         android:id="@+id/tv_stepDesc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/RecipeTextView"
         android:layout_marginTop="24dp"
-        android:text="Instructions Here"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/playerView"
-        android:layout_marginLeft="15dp"></TextView>
+        tools:text="Instructions Here"></TextView>
 
     <Button
         android:id="@+id/button_previousStep"

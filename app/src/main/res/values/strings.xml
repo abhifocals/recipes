@@ -14,4 +14,5 @@
     <string name="cheesecake">Cheesecake</string>
     <string name="yellowCake">Yellow Cake</string>
     <string name="noVideoAvailable">No video is available for this step.</string>
+    <string name="ingredientsLabel">Ingredients</string>
 </resources>
