@@ -290,7 +290,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
      * Shows a toast if video url is empty.
      */
     private void showNoVideoToast() {
-        Toast toast = Toast.makeText(getActivity(), getString(R.string.noVideoAvailable), Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(getActivity(), getString(R.string.noVideoAvailable), Toast.LENGTH_SHORT);
 
         LinearLayout linearLayout = (LinearLayout) toast.getView();
         TextView textView = (TextView) linearLayout.getChildAt(0);
