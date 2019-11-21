@@ -24,20 +24,20 @@
 
     <Button
         android:id="@+id/button_previousStep"
-        android:layout_width="150dp"
+        android:layout_width="@dimen/layout_width"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginStart="@dimen/margin_start"
+        android:layout_marginBottom="@dimen/margin_bottom"
         android:text="@string/previous_step"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"></Button>
 
     <Button
         android:id="@+id/button_nextStep"
-        android:layout_width="150dp"
+        android:layout_width="@dimen/layout_width"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="52dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginEnd="@dimen/margin_start"
+        android:layout_marginBottom="@dimen/margin_bottom"
         android:text="@string/next_step"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"></Button>
