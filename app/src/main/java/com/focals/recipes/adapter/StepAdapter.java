@@ -31,7 +31,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
     public StepHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.activity_detail_recipe_singlestep, parent, false);
+        View view = inflater.inflate(R.layout.step, parent, false);
 
         StepHolder holder = new StepHolder(view);
 

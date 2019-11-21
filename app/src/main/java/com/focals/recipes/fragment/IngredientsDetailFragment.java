@@ -56,7 +56,7 @@ public class IngredientsDetailFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         // Setup IngredientAdapter
-        IngredientsAdapter ingredientsAdapter = new IngredientsAdapter(getContext(), R.layout.activity_detail_ingredients_singleingredient, ingredients);
+        IngredientsAdapter ingredientsAdapter = new IngredientsAdapter(getContext(), R.layout.ingredient, ingredients);
         ingredientsListView.setDivider(null);
         ingredientsListView.setAdapter(ingredientsAdapter);
 
