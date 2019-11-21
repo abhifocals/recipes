@@ -15,4 +15,6 @@
     <string name="yellowCake">Yellow Cake</string>
     <string name="noVideoAvailable">No video is available for this step.</string>
     <string name="ingredientsLabel">Ingredients</string>
+    <string name="previous_step">Previous Step</string>
+    <string name="next_step">Next Step</string>
 </resources>
