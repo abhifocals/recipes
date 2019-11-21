@@ -99,25 +99,28 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
         // Getting recipes from JsonParser
         recipes = RecipeJsonParser.getRecipes();
 
-        // In case of Phone, getting current recipe and step position from StepActivity
-        if (!isTablet) {
-            currentRecipePosition = getActivity().getIntent().getIntExtra(getString(R.string.recipe_position), -1);
-            currentStepPosition = getActivity().getIntent().getIntExtra(getString(R.string.step_position), -1);
+        // Retreiving the current step and player position values saved during rotation
+        if (savedInstanceState != null) {
+            playerCurrentPosition = savedInstanceState.getLong(getString(R.string.player_position));
+            currentStepPosition = savedInstanceState.getInt(getString(R.string.step_position));
+        } else {
+
+            // In case of Phone, getting current recipe and step position from StepActivity
+            if (!isTablet) {
+                currentRecipePosition = getActivity().getIntent().getIntExtra(getString(R.string.recipe_position), -1);
+                currentStepPosition = getActivity().getIntent().getIntExtra(getString(R.string.step_position), -1);
+            }
         }
 
         // Using the current recipe and step position values
         currentRecipe = recipes.get(currentRecipePosition);
         currentRecipeSteps = currentRecipe.getSteps();
 
+
         // Setting the ingredient text and video url
         stepDescriptionTextView.setText(currentRecipeSteps.get(currentStepPosition).get(RecipeJsonParser.STEP_DESC));
         videoUri = Uri.parse(currentRecipeSteps.get(currentStepPosition).get(RecipeJsonParser.STEP_VIDEO));
 
-        // Retreiving the current step and player position values saved during rotation
-        if (savedInstanceState != null) {
-            playerCurrentPosition = savedInstanceState.getLong(getString(R.string.player_position));
-            currentStepPosition = savedInstanceState.getInt(getString(R.string.step_position));
-        }
 
         // Initializing the player
         initializePlayer(videoUri, playerCurrentPosition);
