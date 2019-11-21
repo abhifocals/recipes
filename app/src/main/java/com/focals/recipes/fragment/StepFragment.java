@@ -91,7 +91,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_step, container, false);
+        View view = inflater.inflate(R.layout.step_detail, container, false);
 
         // Binding view with Butterknife
         ButterKnife.bind(this, view);

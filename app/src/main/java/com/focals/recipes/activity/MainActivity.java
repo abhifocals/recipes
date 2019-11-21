@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         recipeList = RecipeJsonParser.parseRecipes(this);
 
         // Setting the adapter in view
-        MainAdapter mainAdapter = new MainAdapter(this, R.layout.activity_main_singlerecipe, recipeList);
+        MainAdapter mainAdapter = new MainAdapter(this, R.layout.recipe, recipeList);
         gridView.setAdapter(mainAdapter);
     }
 
