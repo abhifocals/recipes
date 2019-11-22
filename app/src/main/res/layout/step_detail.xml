@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></com.google.android.exoplayer2.ui.PlayerView>
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@android:color/black"></com.google.android.exoplayer2.ui.PlayerView>
 
     <TextView
         android:id="@+id/tv_stepDesc"

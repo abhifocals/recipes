@@ -68,7 +68,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
     private Recipe currentRecipe;
     private ArrayList<HashMap<String, String>> currentRecipeSteps;
 
-    private boolean isTablet;
+    private static boolean IS_TABLET;
 
     public StepFragment() {
         // Required empty public constructor
@@ -83,7 +83,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
     public StepFragment(int recipePosition, int stepPosition) {
         this.currentRecipePosition = recipePosition;
         this.currentStepPosition = stepPosition;
-        isTablet = true;
+        IS_TABLET = true;
     }
 
     @Override
@@ -106,7 +106,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
         } else {
 
             // In case of Phone, getting current recipe and step position from StepActivity
-            if (!isTablet) {
+            if (!IS_TABLET) {
                 currentRecipePosition = getActivity().getIntent().getIntExtra(getString(R.string.recipe_position), -1);
                 currentStepPosition = getActivity().getIntent().getIntExtra(getString(R.string.step_position), -1);
             }
@@ -163,7 +163,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
                 simpleExoPlayer.seekTo(currentPosition);
             }
 
-            if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && !isTablet) {
+            if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && !IS_TABLET) {
                 setFullScreen();
             }
         }
