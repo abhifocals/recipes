@@ -281,6 +281,11 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
 
         playerView.setLayoutParams(params);
 
+        // Hide StepDesc TextView and Previous-Next Buttons
+        stepDescriptionTextView.setVisibility(View.INVISIBLE);
+        previousButton.setVisibility(View.INVISIBLE);
+        nextButton.setVisibility(View.INVISIBLE);
+
         playerView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
