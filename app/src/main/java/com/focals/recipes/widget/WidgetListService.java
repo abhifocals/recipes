@@ -1,4 +1,4 @@
-package widget;
+package com.focals.recipes.widget;
 
 import android.content.Context;
 import android.content.Intent;

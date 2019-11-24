@@ -10,13 +10,13 @@ import com.focals.recipes.R;
 import com.focals.recipes.adapter.MainAdapter;
 import com.focals.recipes.utils.Recipe;
 import com.focals.recipes.utils.RecipeJsonParser;
+import com.focals.recipes.widget.RecipeWidgetProvider;
 
 import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import widget.RecipeWidgetProvider;
 
 public class MainActivity extends AppCompatActivity {
 
