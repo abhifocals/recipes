@@ -9,6 +9,10 @@ import android.widget.RemoteViews;
 
 import com.focals.recipes.R;
 import com.focals.recipes.activity.MainActivity;
+import com.focals.recipes.utils.RecipeJsonParser;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Implementation of App Widget functionality.
@@ -21,12 +25,24 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
         CharSequence widgetText = context.getString(R.string.appwidget_text);
 
         // Construct the RemoteViews object
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_widget);
-        views.setTextViewText(R.id.appwidget_text, widgetText);
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_list);
+//        views.setTextViewText(R.id.appwidget_text, widgetText);
+
+
+        Intent listIntent = new Intent(context, WidgetListService.class);
+        views.setRemoteAdapter(R.id.listView_Widget, listIntent);
+
+
+
+
+
+
+
+
 
         // Add PendingIntent
-        Intent intent = new Intent(context, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+        Intent launchIntent = new Intent(context, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent, 0);
         views.setOnClickPendingIntent(R.id.appwidget_text, pendingIntent);
 
         // Instruct the widget manager to update the widget
