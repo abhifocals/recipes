@@ -17,7 +17,7 @@ import com.focals.recipes.activity.MainActivity;
 public class RecipeWidgetProvider extends AppWidgetProvider {
 
     public static final String RECIPE_INTENT = "com.focals.recipes.recipe_intent";
-    private int recipePosition = -1;
+    private static int recipePosition = -1;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -26,22 +26,21 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
         if (intent.getAction().equals(RECIPE_INTENT)) {
             int position = intent.getIntExtra(context.getString(R.string.recipe_position), -1);
             recipePosition = position;
-
-
-
-
-
-
         }
-    }
-
-    private void updateWidgetsWithRecipeIngredients(Context context, int recipePosition) {
 
         AppWidgetManager widgetManager = AppWidgetManager.getInstance(context);
-        ComponentName componentName = new ComponentName(context.getPackageName(), "com.focals.recipes.widget.RecipeWidgetProvider");
+        ComponentName componentName = new ComponentName(context.getPackageName(),"com.focals.recipes.widget.RecipeWidgetProvider" );
         int[] ids = widgetManager.getAppWidgetIds(componentName);
 
+        onUpdate(context, widgetManager, ids);
+    }
 
+    @Override
+    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        // There may be multiple widgets active, so update all of them
+        for (int appWidgetId : appWidgetIds) {
+            updateAppWidget(context, appWidgetManager, appWidgetId);
+        }
     }
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
@@ -52,29 +51,11 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
         // Set  ListView
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_list);
         Intent listIntent = new Intent(context, WidgetListService.class);
-        listIntent.putExtra(context.getString(R.string.recipe_position), -1);
+        listIntent.putExtra(context.getString(R.string.recipe_position), recipePosition);
         views.setRemoteAdapter(R.id.listView_Widget, listIntent);
-
-
-
-
-
-
-        // Add PendingIntent to start MainActivity
-        Intent launchIntent = new Intent(context, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent, 0);
-        views.setOnClickPendingIntent(R.id.appwidget_text, pendingIntent);
 
         // Instruct the com.focals.recipes.widget manager to update the com.focals.recipes.widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
-    }
-
-    @Override
-    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        // There may be multiple widgets active, so update all of them
-        for (int appWidgetId : appWidgetIds) {
-            updateAppWidget(context, appWidgetManager, appWidgetId);
-        }
     }
 
     @Override
