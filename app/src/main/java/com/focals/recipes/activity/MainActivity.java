@@ -1,21 +1,22 @@
 package com.focals.recipes.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import com.focals.recipes.adapter.MainAdapter;
 import com.focals.recipes.R;
+import com.focals.recipes.adapter.MainAdapter;
 import com.focals.recipes.utils.Recipe;
 import com.focals.recipes.utils.RecipeJsonParser;
 
 import java.util.ArrayList;
+
+import androidx.appcompat.app.AppCompatActivity;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import widget.RecipeWidgetProvider;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -67,6 +68,12 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(getString(R.string.recipe_position), position);
 
                 startActivity(intent);
+
+                // Send recipe info to WidgetProvider
+                Intent widgetIntent = new Intent(MainActivity.this, RecipeWidgetProvider.class);
+                widgetIntent.setAction(RecipeWidgetProvider.RECIPE_INTENT);
+                widgetIntent.putExtra(getString(R.string.recipe_position), position);
+                sendBroadcast(widgetIntent);
             }
         });
     }
