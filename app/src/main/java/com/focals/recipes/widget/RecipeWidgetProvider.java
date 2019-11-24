@@ -24,15 +24,14 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
         super.onReceive(context, intent);
 
         if (intent.getAction().equals(RECIPE_INTENT)) {
-            int position = intent.getIntExtra(context.getString(R.string.recipe_position), -1);
-            recipePosition = position;
+            recipePosition = intent.getIntExtra(context.getString(R.string.recipe_position), -1);
         }
 
         AppWidgetManager widgetManager = AppWidgetManager.getInstance(context);
         ComponentName componentName = new ComponentName(context.getPackageName(),"com.focals.recipes.widget.RecipeWidgetProvider" );
         int[] ids = widgetManager.getAppWidgetIds(componentName);
 
-        onUpdate(context, widgetManager, ids);
+        widgetManager.notifyAppWidgetViewDataChanged(ids, R.id.listView_Widget);
     }
 
     @Override
@@ -45,9 +44,6 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
-
-        CharSequence widgetText = context.getString(R.string.appwidget_text);
-
         // Set  ListView
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_list);
         Intent listIntent = new Intent(context, WidgetListService.class);
