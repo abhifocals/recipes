@@ -22,25 +22,28 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
         CharSequence widgetText = context.getString(R.string.appwidget_text);
 
-        // Construct the RemoteViews object
+        // Set  ListView
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_list);
-//        views.setTextViewText(R.id.appwidget_text, widgetText);
-
-
         Intent listIntent = new Intent(context, WidgetListService.class);
         views.setRemoteAdapter(R.id.listView_Widget, listIntent);
 
-
-
-
-
-
-
-
-
-        // Add PendingIntent
+        // Add PendingIntent to start MainActivity
         Intent launchIntent = new Intent(context, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent, 0);
         views.setOnClickPendingIntent(R.id.appwidget_text, pendingIntent);
