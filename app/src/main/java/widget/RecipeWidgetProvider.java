@@ -3,6 +3,7 @@ package widget;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
@@ -19,6 +20,42 @@ import java.util.HashMap;
  */
 public class RecipeWidgetProvider extends AppWidgetProvider {
 
+    public static final String RECIPE_INTENT = "com.focals.recipes.recipe_intent";
+    private int recipePosition = -1;
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        super.onReceive(context, intent);
+
+        if (intent.getAction().equals(RECIPE_INTENT)) {
+            int position = intent.getIntExtra(context.getString(R.string.recipe_position), -1);
+            recipePosition = position;
+
+
+
+
+
+
+        }
+    }
+
+    private void updateWidgetsWithRecipeIngredients(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds,  int recipePosition) {
+
+
+        AppWidgetManager widgetManager = AppWidgetManager.getInstance(context);
+
+        ComponentName componentName = new ComponentName(context.getPackageName(), );
+
+
+
+//        int[] widgetIds = widgetManager.getAppWidgetIds(new ComponentName(context.getPackageName(),RecipeWidgetProvider.class));
+
+
+
+
+
+    }
+
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
@@ -27,7 +64,13 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
         // Set  ListView
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_list);
         Intent listIntent = new Intent(context, WidgetListService.class);
+        listIntent.putExtra(context.getString(R.string.recipe_position), -1);
         views.setRemoteAdapter(R.id.listView_Widget, listIntent);
+
+
+
+
+
 
         // Add PendingIntent to start MainActivity
         Intent launchIntent = new Intent(context, MainActivity.class);
