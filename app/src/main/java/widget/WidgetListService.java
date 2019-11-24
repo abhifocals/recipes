@@ -6,32 +6,28 @@ import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.focals.recipes.R;
-import com.focals.recipes.utils.RecipeJsonParser;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class WidgetListService extends RemoteViewsService {
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
-        return new WidgetListServiceFactory(this);
+        int recipePosition = intent.getIntExtra(getString(R.string.recipe_position), -1);
+
+        return new WidgetListServiceFactory(this, recipePosition);
     }
 }
 
 class WidgetListServiceFactory implements RemoteViewsService.RemoteViewsFactory{
 
     Context context;
+    private int recipePosition;
 
 
-    public WidgetListServiceFactory(Context context) {
+    public WidgetListServiceFactory(Context context, int recipePosition) {
         this.context = context;
-
-
+        this.recipePosition = recipePosition;
     }
 
     @Override
