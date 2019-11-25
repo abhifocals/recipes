@@ -1,5 +1,6 @@
 package com.focals.recipes.widget;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
@@ -8,6 +9,8 @@ import android.content.Intent;
 import android.widget.RemoteViews;
 
 import com.focals.recipes.R;
+import com.focals.recipes.activity.MainActivity;
+import com.focals.recipes.activity.RecipeDetailActivity;
 import com.focals.recipes.utils.RecipeJsonParser;
 
 /**
@@ -50,7 +53,14 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
         listIntent = new Intent(context, WidgetListService.class);
         views.setRemoteAdapter(R.id.listView_Widget, listIntent);
 
+        // Set Widget Title
         views.setTextViewText(R.id.widget_recipe_title, RecipeJsonParser.getRecipes().get(RECIPE_POSITION).getName());
+
+
+        // Set PendingIntent to open MainActivity
+        Intent launchIntent = new Intent(context, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,launchIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        views.setOnClickPendingIntent(R.id.widget_image, pendingIntent);
 
         // Instruct the com.focals.recipes.widget manager to update the com.focals.recipes.widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
