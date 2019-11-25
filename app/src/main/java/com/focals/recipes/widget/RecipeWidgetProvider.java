@@ -22,6 +22,14 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
     public static int RECIPE_POSITION = -1;
     static Intent listIntent;
 
+
+    /**
+     * This method is for receiving Recipe Position from  MainActivity.
+     *
+     * @param context
+     * @param intent
+     */
+
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
@@ -30,12 +38,12 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
             RECIPE_POSITION = intent.getIntExtra(context.getString(R.string.recipe_position), -1);
 
             AppWidgetManager widgetManager = AppWidgetManager.getInstance(context);
-            ComponentName componentName = new ComponentName(context.getPackageName(),"com.focals.recipes.widget.RecipeWidgetProvider" );
+            ComponentName componentName = new ComponentName(context.getPackageName(), "com.focals.recipes.widget.RecipeWidgetProvider");
             int[] ids = widgetManager.getAppWidgetIds(componentName);
 
+            // Notify RemoteViewService to update listview
             widgetManager.notifyAppWidgetViewDataChanged(ids, R.id.listView_Widget);
         }
-
     }
 
     @Override
@@ -58,10 +66,10 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
 
         // Set PendingIntent to open MainActivity
         Intent launchIntent = new Intent(context, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,launchIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setOnClickPendingIntent(R.id.widget_image, pendingIntent);
 
-        // Instruct the com.focals.recipes.widget manager to update the com.focals.recipes.widget
+        // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 

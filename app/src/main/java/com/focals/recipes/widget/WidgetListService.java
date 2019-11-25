@@ -26,7 +26,6 @@ class WidgetListServiceFactory implements RemoteViewsService.RemoteViewsFactory 
     Context context;
     ArrayList<HashMap<String, String>> ingredientsList = new ArrayList<>();
 
-
     public WidgetListServiceFactory(Context context) {
         this.context = context;
     }
@@ -35,6 +34,10 @@ class WidgetListServiceFactory implements RemoteViewsService.RemoteViewsFactory 
     public void onCreate() {
 
     }
+
+    /**
+     * Updates data in the widget if a new recipe is clicked.
+     */
 
     @Override
     public void onDataSetChanged() {
