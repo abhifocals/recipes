@@ -1,6 +1,5 @@
 package com.focals.recipes.widget;
 
-import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
@@ -9,7 +8,6 @@ import android.content.Intent;
 import android.widget.RemoteViews;
 
 import com.focals.recipes.R;
-import com.focals.recipes.activity.MainActivity;
 
 /**
  * Implementation of App Widget functionality.
@@ -17,21 +15,23 @@ import com.focals.recipes.activity.MainActivity;
 public class RecipeWidgetProvider extends AppWidgetProvider {
 
     public static final String RECIPE_INTENT = "com.focals.recipes.recipe_intent";
-    private static int recipePosition = -1;
+    public static int RECIPE_POSITION = -1;
+    static Intent listIntent;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
 
         if (intent.getAction().equals(RECIPE_INTENT)) {
-            recipePosition = intent.getIntExtra(context.getString(R.string.recipe_position), -1);
+            RECIPE_POSITION = intent.getIntExtra(context.getString(R.string.recipe_position), -1);
+
+            AppWidgetManager widgetManager = AppWidgetManager.getInstance(context);
+            ComponentName componentName = new ComponentName(context.getPackageName(),"com.focals.recipes.widget.RecipeWidgetProvider" );
+            int[] ids = widgetManager.getAppWidgetIds(componentName);
+
+            widgetManager.notifyAppWidgetViewDataChanged(ids, R.id.listView_Widget);
         }
 
-        AppWidgetManager widgetManager = AppWidgetManager.getInstance(context);
-        ComponentName componentName = new ComponentName(context.getPackageName(),"com.focals.recipes.widget.RecipeWidgetProvider" );
-        int[] ids = widgetManager.getAppWidgetIds(componentName);
-
-        widgetManager.notifyAppWidgetViewDataChanged(ids, R.id.listView_Widget);
     }
 
     @Override
@@ -46,8 +46,7 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
                                 int appWidgetId) {
         // Set  ListView
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_list);
-        Intent listIntent = new Intent(context, WidgetListService.class);
-        listIntent.putExtra(context.getString(R.string.recipe_position), recipePosition);
+        listIntent = new Intent(context, WidgetListService.class);
         views.setRemoteAdapter(R.id.listView_Widget, listIntent);
 
         // Instruct the com.focals.recipes.widget manager to update the com.focals.recipes.widget

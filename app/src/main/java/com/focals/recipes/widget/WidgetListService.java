@@ -2,32 +2,33 @@ package com.focals.recipes.widget;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.focals.recipes.R;
+import com.focals.recipes.utils.RecipeJsonParser;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class WidgetListService extends RemoteViewsService {
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
-        int recipePosition = intent.getIntExtra(getString(R.string.recipe_position), -1);
-
-        return new WidgetListServiceFactory(this, recipePosition);
+        return new WidgetListServiceFactory(this);
     }
 }
 
 class WidgetListServiceFactory implements RemoteViewsService.RemoteViewsFactory{
 
     Context context;
-    private int recipePosition;
+    ArrayList<HashMap<String, String>> ingredientsList;
 
 
-    public WidgetListServiceFactory(Context context, int recipePosition) {
+    public WidgetListServiceFactory(Context context) {
         this.context = context;
-        this.recipePosition = recipePosition;
     }
 
     @Override
@@ -37,7 +38,11 @@ class WidgetListServiceFactory implements RemoteViewsService.RemoteViewsFactory{
 
     @Override
     public void onDataSetChanged() {
+        if (RecipeWidgetProvider.RECIPE_POSITION >= 0) {
+            ingredientsList = RecipeJsonParser.getRecipes().get(RecipeWidgetProvider.RECIPE_POSITION).getIngredients();
+        }
 
+        Log.d(this.getClass().getSimpleName(), String.valueOf(RecipeWidgetProvider.RECIPE_POSITION));
     }
 
     @Override
