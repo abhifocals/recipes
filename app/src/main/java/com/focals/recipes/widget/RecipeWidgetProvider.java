@@ -56,7 +56,6 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
         // Set Widget Title
         views.setTextViewText(R.id.widget_recipe_title, RecipeJsonParser.getRecipes().get(RECIPE_POSITION).getName());
 
-
         // Set PendingIntent to open MainActivity
         Intent launchIntent = new Intent(context, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,launchIntent, PendingIntent.FLAG_UPDATE_CURRENT);
