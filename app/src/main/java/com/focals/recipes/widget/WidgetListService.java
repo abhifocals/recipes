@@ -21,10 +21,10 @@ public class WidgetListService extends RemoteViewsService {
     }
 }
 
-class WidgetListServiceFactory implements RemoteViewsService.RemoteViewsFactory{
+class WidgetListServiceFactory implements RemoteViewsService.RemoteViewsFactory {
 
     Context context;
-    ArrayList<HashMap<String, String>> ingredientsList;
+    ArrayList<HashMap<String, String>> ingredientsList = new ArrayList<>();
 
 
     public WidgetListServiceFactory(Context context) {
@@ -52,25 +52,22 @@ class WidgetListServiceFactory implements RemoteViewsService.RemoteViewsFactory{
 
     @Override
     public int getCount() {
-        return 3;
+        return ingredientsList.size();
     }
 
     @Override
     public RemoteViews getViewAt(int position) {
 
-      String[] ingredients = {"One", "Two", "Three"};
-      List<String> ingredientsList = Arrays.asList(ingredients);
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_widget);
 
-      RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_widget);
+        if (ingredientsList.size() > 0) {
+            String text = ingredientsList.get(position).get(RecipeJsonParser.INGREDIENT);
+            views.setTextViewText(R.id.appwidget_text, text);
+        } else {
+            Log.d(this.getClass().getSimpleName(), "View is empty");
+        }
 
-      String text = ingredients[position];
-
-      views.setTextViewText(R.id.appwidget_text, text);
-
-
-
-
-      return views;
+        return views;
     }
 
     @Override
