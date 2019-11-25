@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.widget.RemoteViews;
 
 import com.focals.recipes.R;
+import com.focals.recipes.utils.RecipeJsonParser;
 
 /**
  * Implementation of App Widget functionality.
@@ -48,6 +49,8 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_list);
         listIntent = new Intent(context, WidgetListService.class);
         views.setRemoteAdapter(R.id.listView_Widget, listIntent);
+
+        views.setTextViewText(R.id.widget_recipe_title, RecipeJsonParser.getRecipes().get(RECIPE_POSITION).getName());
 
         // Instruct the com.focals.recipes.widget manager to update the com.focals.recipes.widget
         appWidgetManager.updateAppWidget(appWidgetId, views);

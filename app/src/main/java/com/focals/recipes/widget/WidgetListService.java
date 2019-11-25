@@ -59,13 +59,8 @@ class WidgetListServiceFactory implements RemoteViewsService.RemoteViewsFactory 
     public RemoteViews getViewAt(int position) {
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_widget);
-
-        if (ingredientsList.size() > 0) {
-            String text = ingredientsList.get(position).get(RecipeJsonParser.INGREDIENT);
-            views.setTextViewText(R.id.appwidget_text, text);
-        } else {
-            Log.d(this.getClass().getSimpleName(), "View is empty");
-        }
+        String text = ingredientsList.get(position).get(RecipeJsonParser.INGREDIENT);
+        views.setTextViewText(R.id.appwidget_text, text);
 
         return views;
     }
