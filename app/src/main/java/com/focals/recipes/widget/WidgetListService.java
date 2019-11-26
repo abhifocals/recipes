@@ -10,9 +10,6 @@ import com.focals.recipes.R;
 import com.focals.recipes.utils.RecipeJsonParser;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 
 public class WidgetListService extends RemoteViewsService {
     @Override

@@ -2,8 +2,6 @@ package com.focals.recipes.utils;
 
 import android.content.Context;
 
-import com.focals.recipes.activity.MainActivity;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

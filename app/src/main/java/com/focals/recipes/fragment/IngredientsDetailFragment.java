@@ -11,7 +11,6 @@ import com.focals.recipes.R;
 import com.focals.recipes.adapter.IngredientsAdapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import androidx.fragment.app.Fragment;
 import butterknife.BindView;

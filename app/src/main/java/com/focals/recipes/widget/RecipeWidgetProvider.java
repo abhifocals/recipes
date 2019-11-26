@@ -10,7 +10,6 @@ import android.widget.RemoteViews;
 
 import com.focals.recipes.R;
 import com.focals.recipes.activity.MainActivity;
-import com.focals.recipes.activity.RecipeDetailActivity;
 import com.focals.recipes.utils.RecipeJsonParser;
 
 /**
