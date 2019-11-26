@@ -20,7 +20,7 @@ public class WidgetListService extends RemoteViewsService {
 
 class WidgetListServiceFactory implements RemoteViewsService.RemoteViewsFactory {
 
-    private Context context;
+    private final Context context;
     private ArrayList<String> ingredientsList = new ArrayList<>();
 
     public WidgetListServiceFactory(Context context) {

@@ -20,8 +20,8 @@ package com.focals.recipes.adapter;
 
 public class MainAdapter extends ArrayAdapter<Recipe> {
 
-    private Context context;
-    private int layoutResourceId;
+    private final Context context;
+    private final int layoutResourceId;
 
     public MainAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Recipe> recipelist) {
         super(context, resource, recipelist);

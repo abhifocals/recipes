@@ -23,7 +23,7 @@ public class RecipeJsonParser {
     public static final String STEP_VIDEO = "videoURL";
     private static final String STEP_THUMBNAIL = "thumbnailURL";
 
-    private static ArrayList<Recipe> recipes = new ArrayList<>();
+    private static final ArrayList<Recipe> recipes = new ArrayList<>();
 
     public static ArrayList<Recipe> parseRecipes(Context context) {
 

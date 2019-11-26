@@ -18,8 +18,8 @@ import butterknife.ButterKnife;
 
 public class IngredientsAdapter extends ArrayAdapter<String> {
 
-    private ArrayList<String> ingredientsList;
-    private int layoutRes;
+    private final ArrayList<String> ingredientsList;
+    private final int layoutRes;
 
     public IngredientsAdapter(@NonNull Context context, int layoutRes, @NonNull ArrayList<String> ingredients) {
         super(context, layoutRes, ingredients);

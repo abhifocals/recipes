@@ -6,10 +6,10 @@ import java.util.HashMap;
 public class Recipe {
     private String id;
     private String name;
-    private ArrayList<String> ingredients;
-    private ArrayList<HashMap<String, String>> steps;
-    private String servings;
-    private String imageUrl;
+    private final ArrayList<String> ingredients;
+    private final ArrayList<HashMap<String, String>> steps;
+    private final String servings;
+    private final String imageUrl;
 
     public Recipe(String id, String name, ArrayList<String> ingredients, ArrayList<HashMap<String, String>> steps, String service, String imageUrl) {
         this.id = id;
