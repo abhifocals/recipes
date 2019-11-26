@@ -18,12 +18,12 @@ import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class IngredientsAdapter extends ArrayAdapter<HashMap<String, String>> {
+public class IngredientsAdapter extends ArrayAdapter<String> {
 
-    private ArrayList<HashMap<String, String>> ingredientsList;
+    private ArrayList<String> ingredientsList;
     private int layoutRes;
 
-    public IngredientsAdapter(@NonNull Context context, int layoutRes, @NonNull ArrayList<HashMap<String, String>> ingredients) {
+    public IngredientsAdapter(@NonNull Context context, int layoutRes, @NonNull ArrayList<String> ingredients) {
         super(context, layoutRes, ingredients);
         ingredientsList = ingredients;
         this.layoutRes = layoutRes;
@@ -48,14 +48,16 @@ public class IngredientsAdapter extends ArrayAdapter<HashMap<String, String>> {
         ViewHolder holder = new ViewHolder(convertView);
 
         // Set name of Ingredient in TextView
-        HashMap<String, String> currentIngredient = ingredientsList.get(position);
+//        HashMap<String, String> currentIngredient = ingredientsList.get(position);
+//
+//        String ingredient = currentIngredient.get(RecipeJsonParser.INGREDIENT);
+//        String qty = currentIngredient.get(RecipeJsonParser.QUANTITY);
+//        String measure = currentIngredient.get(RecipeJsonParser.MEASURE);
+//        String ingredientWithQtyMeasure = qty + " " + measure + " " + ingredient;
+//
+        holder.ingredientTextView.setText(ingredientsList.get(position));
 
-        String ingredient = currentIngredient.get(RecipeJsonParser.INGREDIENT);
-        String qty = currentIngredient.get(RecipeJsonParser.QUANTITY);
-        String measure = currentIngredient.get(RecipeJsonParser.MEASURE);
-        String ingredientWithQtyMeasure = qty + " " + measure + " " + ingredient;
 
-        holder.ingredientTextView.setText(ingredientWithQtyMeasure);
 
         return convertView;
     }

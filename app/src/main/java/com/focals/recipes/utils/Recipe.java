@@ -7,14 +7,16 @@ public class Recipe {
     private String id;
     private String name;
     private ArrayList<HashMap<String, String>> ingredients;
+    private ArrayList<String> ingredients1;
     private ArrayList<HashMap<String, String>> steps;
     private String servings;
     private String imageUrl;
 
-    public Recipe(String id, String name, ArrayList<HashMap<String, String>> ingredients, ArrayList<HashMap<String, String>> steps, String service, String imageUrl) {
+    public Recipe(String id, String name, ArrayList<HashMap<String, String>> ingredients, ArrayList<String> ingredients1, ArrayList<HashMap<String, String>> steps, String service, String imageUrl) {
         this.id = id;
         this.name = name;
         this.ingredients = ingredients;
+        this.ingredients1 = ingredients1;
         this.steps = steps;
         this.servings = service;
         this.imageUrl = imageUrl;
@@ -42,6 +44,10 @@ public class Recipe {
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    public ArrayList<String> getIngredients1() {
+        return ingredients1;
     }
 
     public void setId(String id) {

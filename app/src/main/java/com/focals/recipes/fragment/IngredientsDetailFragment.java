@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
  */
 public class IngredientsDetailFragment extends Fragment {
 
-    private ArrayList<HashMap<String, String>> ingredients;
+    private ArrayList<String> ingredients;
 
     @BindView(R.id.lv_ingredients)
     ListView ingredientsListView;
@@ -36,7 +36,7 @@ public class IngredientsDetailFragment extends Fragment {
      *
      * @param ingredients
      */
-    public IngredientsDetailFragment(ArrayList<HashMap<String, String>> ingredients) {
+    public IngredientsDetailFragment(ArrayList<String> ingredients) {
         this.ingredients = ingredients;
     }
 
@@ -49,7 +49,7 @@ public class IngredientsDetailFragment extends Fragment {
 
         // Used for Phone (since Tablet explicitly creates Fragment with ingredient list)
         if (ingredients == null) {
-            ingredients = (ArrayList<HashMap<String, String>>) getActivity().getIntent().getSerializableExtra(getString(R.string.ingredients_list));
+            ingredients = (ArrayList<String>) getActivity().getIntent().getSerializableExtra(getString(R.string.ingredients_list));
         }
 
         // Binding views with Butterknife

@@ -8,6 +8,7 @@ import com.focals.recipes.R;
 import com.focals.recipes.adapter.StepAdapter;
 import com.focals.recipes.fragment.IngredientsDetailFragment;
 import com.focals.recipes.fragment.StepFragment;
+import com.focals.recipes.utils.RecipeJsonParser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,7 +22,7 @@ import butterknife.ButterKnife;
 public class RecipeDetailActivity extends AppCompatActivity implements StepAdapter.StepClickHandler {
 
     private String name;
-    private ArrayList<HashMap<String, String>> ingredients;
+    private ArrayList<String> ingredients;
     private ArrayList<HashMap<String, String>> steps;
     private int recipePosition;
 
@@ -41,8 +42,12 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
     protected void onStart() {
         super.onStart();
 
+        // Getting recipe position from MainActivity
+        recipePosition = getIntent().getIntExtra(getString(R.string.recipe_position), -1);
+
         name = getIntent().getStringExtra(getString(R.string.recipe_name));
-        ingredients = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra(getString(R.string.ingredients_list));
+//        ingredients = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra(getString(R.string.ingredients_list));
+        ingredients = RecipeJsonParser.getRecipes().get(recipePosition).getIngredients1();
         steps = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra(getString(R.string.steps_list));
 
         // Setup StepAdapter
@@ -54,8 +59,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
         // Set ActionBar Title
         getSupportActionBar().setTitle(name);
 
-        // Getting recipe position from MainActivity
-        recipePosition = getIntent().getIntExtra(getString(R.string.recipe_position), -1);
+
     }
 
     /**

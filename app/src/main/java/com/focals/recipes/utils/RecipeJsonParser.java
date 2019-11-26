@@ -2,6 +2,8 @@ package com.focals.recipes.utils;
 
 import android.content.Context;
 
+import com.focals.recipes.activity.MainActivity;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,6 +46,7 @@ public class RecipeJsonParser {
                 // Parse Ingredients
 
                 ArrayList<HashMap<String, String>> ingredientsList = new ArrayList<>();
+                ArrayList<String> ingredients = new ArrayList<>();
 
                 JSONArray ingredientsArray = object.getJSONArray("ingredients");
 
@@ -57,6 +60,15 @@ public class RecipeJsonParser {
                     singleIngredient.put(INGREDIENT, ingredientObject.getString(INGREDIENT).toLowerCase());
 
                     ingredientsList.add(singleIngredient);
+
+
+                    String ingredient = ingredientObject.getString(INGREDIENT);
+                    String qty = ingredientObject.getString(QUANTITY);
+                    String measure = ingredientObject.getString(MEASURE);
+                    String ingredientWithQtyMeasure = qty + " " + measure + " " + ingredient;
+
+                    ingredients.add(ingredientWithQtyMeasure);
+
                 }
 
 
@@ -79,7 +91,7 @@ public class RecipeJsonParser {
                     stepsList.add(singleStep);
                 }
 
-                Recipe recipe = new Recipe(id, name, ingredientsList, stepsList, servings, imageUrl);
+                Recipe recipe = new Recipe(id, name, ingredientsList, ingredients, stepsList, servings, imageUrl);
 
                 recipes.add(recipe);
             }
@@ -115,5 +127,4 @@ public class RecipeJsonParser {
 
         return jsonString;
     }
-
 }
