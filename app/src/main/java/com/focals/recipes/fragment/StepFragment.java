@@ -252,7 +252,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
         mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
                 getActivity(), getString(R.string.app_name)), new DefaultExtractorsFactory(), null, null);
         simpleExoPlayer.prepare(mediaSource);
-        simpleExoPlayer.setPlayWhenReady(true); //TODO: needed?
+        simpleExoPlayer.setPlayWhenReady(true);
     }
 
     /**
