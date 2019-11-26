@@ -9,6 +9,7 @@
     </style>
 
     <style name="MyActionBar" parent="@android:style/Widget.Holo.ActionBar">
+        <!--TODO: How to change ActionBar Title Color. Below doesn't work. -->
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Display1</item>
     </style>

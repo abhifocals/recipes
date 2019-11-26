@@ -60,6 +60,7 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
         listIntent = new Intent(context, WidgetListService.class);
         views.setRemoteAdapter(R.id.listView_Widget, listIntent);
 
+        // TODO: How to update Widget Title based on recipe selected?
         // Set Widget Title
         views.setTextViewText(R.id.widget_recipe_title, RecipeJsonParser.getRecipes().get(RECIPE_POSITION).getName());
 

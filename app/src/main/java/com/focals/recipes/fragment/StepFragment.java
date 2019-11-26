@@ -213,6 +213,9 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
             case R.id.exo_play:
                 if (currentRecipeSteps.get(currentStepPosition).get(RecipeJsonParser.STEP_VIDEO).isEmpty()) {
                     showNoVideoToast();
+
+                    // TODO: How can I set artwork here? Below didn't work.
+                    //  playerView.setDefaultArtwork(getResources().getDrawable(R.drawable.video_not_available, null));
                 }
         }
     }
@@ -252,7 +255,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
         mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
                 getActivity(), getString(R.string.app_name)), new DefaultExtractorsFactory(), null, null);
         simpleExoPlayer.prepare(mediaSource);
-        simpleExoPlayer.setPlayWhenReady(true); //TODO: needed?
+        simpleExoPlayer.setPlayWhenReady(true);
     }
 
     /**
