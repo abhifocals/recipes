@@ -59,7 +59,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
 
     private SimpleExoPlayer simpleExoPlayer;
     private Uri videoUri;
-    MediaSource mediaSource;
+    private MediaSource mediaSource;
     private long playerCurrentPosition;
 
     private int currentStepPosition;

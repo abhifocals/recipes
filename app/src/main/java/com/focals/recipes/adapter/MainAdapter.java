@@ -37,7 +37,7 @@ public class MainAdapter extends ArrayAdapter<Recipe> {
         @BindView(R.id.recipeTitle)
         TextView recipeTitleTextView;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
     }

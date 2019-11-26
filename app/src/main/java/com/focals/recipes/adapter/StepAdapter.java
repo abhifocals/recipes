@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
 public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
 
     private ArrayList<HashMap<String, String>> stepsList;
-    public StepClickHandler clickHandler;
+    private StepClickHandler clickHandler;
 
     public StepAdapter(ArrayList<HashMap<String, String>> stepsList, StepClickHandler clickHandler) {
         this.stepsList = stepsList;
@@ -61,7 +61,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
         @BindView(R.id.tv_stepShortDescription)
         TextView stepTextView;
 
-        public StepHolder(@NonNull View view) {
+        StepHolder(@NonNull View view) {
             super(view);
             ButterKnife.bind(this, view);
 

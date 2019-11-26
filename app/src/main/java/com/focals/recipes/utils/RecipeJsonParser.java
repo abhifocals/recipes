@@ -13,15 +13,15 @@ import java.util.HashMap;
 
 public class RecipeJsonParser {
 
-    public static final String QUANTITY = "quantity";
-    public static final String MEASURE = "measure";
-    public static final String INGREDIENT = "ingredient";
+    private static final String QUANTITY = "quantity";
+    private static final String MEASURE = "measure";
+    private static final String INGREDIENT = "ingredient";
 
-    public static final String STEP_ID = "id";
+    private static final String STEP_ID = "id";
     public static final String STEP_SHORT_DESC = "shortDescription";
     public static final String STEP_DESC = "description";
     public static final String STEP_VIDEO = "videoURL";
-    public static final String STEP_THUMBNAIL = "thumbnailURL";
+    private static final String STEP_THUMBNAIL = "thumbnailURL";
 
     private static ArrayList<Recipe> recipes = new ArrayList<>();
 

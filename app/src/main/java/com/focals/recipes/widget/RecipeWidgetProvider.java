@@ -19,7 +19,7 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
 
     public static final String RECIPE_INTENT = "com.focals.recipes.recipe_intent";
     public static int RECIPE_POSITION = -1;
-    static Intent listIntent;
+    private static Intent listIntent;
 
 
     /**
@@ -53,8 +53,8 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
         }
     }
 
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId) {
+    private static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
+                                        int appWidgetId) {
         // Set  ListView
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_list);
         listIntent = new Intent(context, WidgetListService.class);

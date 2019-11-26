@@ -31,7 +31,7 @@ public class IngredientsAdapter extends ArrayAdapter<String> {
         @BindView(R.id.tv_ingredient)
         TextView ingredientTextView;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
     }
