@@ -46,8 +46,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
         recipePosition = getIntent().getIntExtra(getString(R.string.recipe_position), -1);
 
         name = getIntent().getStringExtra(getString(R.string.recipe_name));
-//        ingredients = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra(getString(R.string.ingredients_list));
-        ingredients = RecipeJsonParser.getRecipes().get(recipePosition).getIngredients1();
+        ingredients = RecipeJsonParser.getRecipes().get(recipePosition).getIngredients();
         steps = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra(getString(R.string.steps_list));
 
         // Setup StepAdapter
@@ -58,8 +57,6 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
 
         // Set ActionBar Title
         getSupportActionBar().setTitle(name);
-
-
     }
 
     /**

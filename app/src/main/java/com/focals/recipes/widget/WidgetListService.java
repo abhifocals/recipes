@@ -24,7 +24,7 @@ public class WidgetListService extends RemoteViewsService {
 class WidgetListServiceFactory implements RemoteViewsService.RemoteViewsFactory {
 
     Context context;
-    ArrayList<HashMap<String, String>> ingredientsList = new ArrayList<>();
+    ArrayList<String> ingredientsList = new ArrayList<>();
 
     public WidgetListServiceFactory(Context context) {
         this.context = context;
@@ -62,8 +62,7 @@ class WidgetListServiceFactory implements RemoteViewsService.RemoteViewsFactory 
     public RemoteViews getViewAt(int position) {
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_widget);
-        String text = ingredientsList.get(position).get(RecipeJsonParser.INGREDIENT);
-        views.setTextViewText(R.id.appwidget_text, text);
+        views.setTextViewText(R.id.appwidget_text, ingredientsList.get(position));
 
         return views;
     }

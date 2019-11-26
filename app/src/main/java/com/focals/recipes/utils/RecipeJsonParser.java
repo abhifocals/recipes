@@ -44,23 +44,12 @@ public class RecipeJsonParser {
 
 
                 // Parse Ingredients
-
-                ArrayList<HashMap<String, String>> ingredientsList = new ArrayList<>();
                 ArrayList<String> ingredients = new ArrayList<>();
-
                 JSONArray ingredientsArray = object.getJSONArray("ingredients");
 
                 for (int j = 0; j < ingredientsArray.length(); j++) {
 
                     JSONObject ingredientObject = ingredientsArray.getJSONObject(j);
-                    HashMap<String, String> singleIngredient = new HashMap<>();
-
-                    singleIngredient.put(QUANTITY, ingredientObject.getString(QUANTITY).toLowerCase());
-                    singleIngredient.put(MEASURE, ingredientObject.getString(MEASURE).toLowerCase());
-                    singleIngredient.put(INGREDIENT, ingredientObject.getString(INGREDIENT).toLowerCase());
-
-                    ingredientsList.add(singleIngredient);
-
 
                     String ingredient = ingredientObject.getString(INGREDIENT);
                     String qty = ingredientObject.getString(QUANTITY);
@@ -68,7 +57,6 @@ public class RecipeJsonParser {
                     String ingredientWithQtyMeasure = qty + " " + measure + " " + ingredient;
 
                     ingredients.add(ingredientWithQtyMeasure);
-
                 }
 
 
@@ -91,7 +79,7 @@ public class RecipeJsonParser {
                     stepsList.add(singleStep);
                 }
 
-                Recipe recipe = new Recipe(id, name, ingredientsList, ingredients, stepsList, servings, imageUrl);
+                Recipe recipe = new Recipe(id, name, ingredients, stepsList, servings, imageUrl);
 
                 recipes.add(recipe);
             }
