@@ -22,14 +22,12 @@ public class MainAdapter extends ArrayAdapter<Recipe> {
 
     private Context context;
     private int layoutResourceId;
-    private ArrayList<Recipe> recipelist;
 
     public MainAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Recipe> recipelist) {
         super(context, resource, recipelist);
 
         this.context = context;
         this.layoutResourceId = resource;
-        this.recipelist = recipelist;
     }
 
     static class ViewHolder {

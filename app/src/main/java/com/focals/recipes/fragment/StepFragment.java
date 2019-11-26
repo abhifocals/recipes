@@ -62,10 +62,8 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
     MediaSource mediaSource;
     private long playerCurrentPosition;
 
-    private ArrayList<Recipe> recipes;
     private int currentStepPosition;
     private int currentRecipePosition;
-    private Recipe currentRecipe;
     private ArrayList<HashMap<String, String>> currentRecipeSteps;
 
     private static boolean IS_TABLET;
@@ -97,7 +95,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
         ButterKnife.bind(this, view);
 
         // Getting recipes from JsonParser
-        recipes = RecipeJsonParser.getRecipes();
+        ArrayList<Recipe> recipes = RecipeJsonParser.getRecipes();
 
         // Retreiving the current step and player position values saved during rotation
         if (savedInstanceState != null) {
@@ -113,7 +111,7 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
         }
 
         // Using the current recipe and step position values
-        currentRecipe = recipes.get(currentRecipePosition);
+        Recipe currentRecipe = recipes.get(currentRecipePosition);
         currentRecipeSteps = currentRecipe.getSteps();
 
 

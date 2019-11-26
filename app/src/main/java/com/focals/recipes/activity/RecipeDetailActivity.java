@@ -23,7 +23,6 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
 
     private String name;
     private ArrayList<String> ingredients;
-    private ArrayList<HashMap<String, String>> steps;
     private int recipePosition;
 
     @BindView(R.id.rv_steps)
@@ -47,7 +46,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements StepAdapt
 
         name = getIntent().getStringExtra(getString(R.string.recipe_name));
         ingredients = RecipeJsonParser.getRecipes().get(recipePosition).getIngredients();
-        steps = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra(getString(R.string.steps_list));
+        ArrayList<HashMap<String, String>> steps = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra(getString(R.string.steps_list));
 
         // Setup StepAdapter
         StepAdapter stepAdapter = new StepAdapter(steps, this);
