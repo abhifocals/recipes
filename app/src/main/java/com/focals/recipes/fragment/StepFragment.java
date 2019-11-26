@@ -274,8 +274,8 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener, V
 
     private void setFullScreen() {
         ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) playerView.getLayoutParams();
-        params.width = params.MATCH_PARENT;
-        params.height = params.MATCH_PARENT;
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        params.height = ViewGroup.LayoutParams.MATCH_PARENT;
 
         playerView.setLayoutParams(params);
 
